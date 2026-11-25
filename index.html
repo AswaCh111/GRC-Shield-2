@@ -1,0 +1,1502 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://cdn.tailwindcss.com https://unpkg.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src https://cdn.jsdelivr.net https://unpkg.com https://fonts.googleapis.com https://fonts.gstatic.com; worker-src blob: https://cdn.jsdelivr.net; child-src blob:">
+<title>GRC SHIELD — Governance, Risk & Compliance | CyberTech Solutions</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2322d3ee' stroke-width='2'><path d='M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z'/></svg>">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>tailwind.config={darkMode:'class',theme:{extend:{}}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#060b1c; --bg2:#0a1230; --card:#0d173a; --card2:#111d45; --border:#1d2b58;
+  --text:#e9effc; --muted:#8ea0c9; --cyan:#22d3ee; --cyan2:#0891b2; --viol:#a78bfa;
+  --shadow:0 8px 30px rgba(2,6,23,.5);
+}
+html.light{
+  --bg:#eef2fb; --bg2:#e4eaf8; --card:#ffffff; --card2:#f4f7fe; --border:#d7e0f2;
+  --text:#0e1a3d; --muted:#5b6b93; --shadow:0 8px 30px rgba(30,50,110,.10);
+}
+*{-webkit-tap-highlight-color:transparent}
+body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;min-height:100vh}
+.mono{font-family:'JetBrains Mono',monospace}
+.muted{color:var(--muted)}
+.text-cy{color:var(--cyan)!important}
+.text-viol{color:var(--viol)!important}
+.card{background:var(--card);border:1px solid var(--border);border-radius:16px;box-shadow:var(--shadow)}
+.sidebar{background:linear-gradient(180deg,var(--bg2),var(--bg));border-right:1px solid var(--border)}
+.badge{display:inline-flex;align-items:center;padding:.15rem .6rem;border-radius:999px;font-size:.7rem;font-weight:600;white-space:nowrap}
+.btn{display:inline-flex;align-items:center;gap:.45rem;padding:.55rem 1.05rem;border-radius:10px;font-weight:600;font-size:.85rem;border:1px solid transparent;cursor:pointer;transition:all .18s ease}
+.btn:active{transform:scale(.97)}
+.btn-pri{background:linear-gradient(135deg,#06b6d4,#3b82f6);color:#fff;box-shadow:0 4px 18px rgba(34,211,238,.35)}
+.btn-pri:hover{filter:brightness(1.12)}
+.btn-ghost{background:transparent;border-color:var(--border);color:var(--text)}
+.btn-ghost:hover{border-color:var(--cyan);color:var(--cyan)}
+.btn-danger{background:rgba(248,113,113,.12);color:#f87171;border-color:rgba(248,113,113,.35)}
+.btn-danger:hover{background:rgba(248,113,113,.22)}
+.btn-sm{padding:.3rem .6rem;font-size:.75rem;border-radius:8px}
+label{display:block;font-size:.72rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);margin-bottom:.35rem}
+input,select,textarea{width:100%;background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:.6rem .8rem;font-size:.875rem;color:var(--text);outline:none;transition:border .15s}
+input:focus,select:focus,textarea:focus{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(34,211,238,.15)}
+input:disabled{cursor:not-allowed}
+select option{background:var(--card);color:var(--text)}
+.tbl{border-collapse:collapse}
+.tbl th{text-align:left;font-size:.68rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);padding:.7rem .9rem;border-bottom:1px solid var(--border);background:var(--card2)}
+.tbl td{padding:.7rem .9rem;border-bottom:1px solid var(--border);font-size:.85rem;vertical-align:middle}
+.tbl tbody tr{transition:background .12s}
+.tbl tbody tr:hover{background:rgba(34,211,238,.05)}
+.progress-track{height:8px;border-radius:99px;background:var(--card2);overflow:hidden;border:1px solid var(--border)}
+.progress-fill{height:100%;border-radius:99px;transition:width .5s ease}
+.nav-item{display:flex;align-items:center;gap:.7rem;padding:.65rem .9rem;border-radius:11px;font-size:.875rem;font-weight:500;color:var(--muted);cursor:pointer;transition:all .15s;border:1px solid transparent}
+.nav-item:hover{color:var(--text);background:var(--card2)}
+.nav-item.active{color:var(--cyan);background:rgba(34,211,238,.09);border-color:rgba(34,211,238,.25)}
+.glow{position:absolute;border-radius:50%;filter:blur(90px);opacity:.35;pointer-events:none}
+.toast{display:flex;align-items:center;gap:.6rem;background:var(--card);border:1px solid var(--border);border-left:3px solid var(--cyan);border-radius:12px;padding:.7rem 1rem;font-size:.85rem;font-weight:500;box-shadow:var(--shadow);animation:tin .25s ease}
+.toast.err{border-left-color:#f87171}
+.toast.info{border-left-color:var(--viol)}
+@keyframes tin{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:none}}
+.heat-cell{width:100%;aspect-ratio:1.6;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.75rem;cursor:pointer;transition:transform .12s;border:1px solid rgba(255,255,255,.06)}
+.heat-cell:hover{transform:scale(1.07)}
+.modal-bg{background:rgba(3,7,18,.72);backdrop-filter:blur(4px)}
+.modal-card{background:var(--card);border:1px solid var(--border);border-radius:18px;box-shadow:var(--shadow);animation:pop .18s ease;max-height:88vh;overflow-y:auto}
+@keyframes pop{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:none}}
+.stat-card{position:relative;overflow:hidden}
+.stat-card::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 85% 15%,rgba(34,211,238,.12),transparent 55%);pointer-events:none}
+.fade-in{animation:fin .3s ease}
+@keyframes fin{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+::-webkit-scrollbar{width:9px;height:9px}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:99px}
+::-webkit-scrollbar-track{background:transparent}
+@media print{
+  .sidebar,#topbar,#toasts,.no-print{display:none!important}
+  body{background:#fff;color:#000}
+  .card{box-shadow:none;border:1px solid #ddd}
+  #view{margin:0!important;padding:0!important}
+}
+#bottomnav button{color:var(--muted)}
+#bottomnav button.active{color:var(--cyan)}
+@media(max-width:1023px){#view{padding-bottom:5.5rem}}
+.toast{max-width:19rem}
+input[type="checkbox"],input[type="file"]{cursor:pointer}
+@media(max-width:640px){.modal-card{padding:1rem!important}}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<div id="toasts" class="fixed bottom-5 right-5 z-[100] space-y-2 w-[19rem] max-w-[90vw]"></div>
+<div id="modal-root"></div>
+<div id="search-drop" class="hidden fixed z-[90] w-[22rem] max-w-[90vw] card overflow-hidden"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+
+<script>
+/* ═════════ GRC SHIELD · CyberTech Solutions · academic demonstration ═════════ */
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const uid=p=>p+'-'+Math.random().toString(36).slice(2,7).toUpperCase();
+const today=()=>new Date().toISOString().slice(0,10);
+const daysAgo=n=>{const d=new Date();d.setDate(d.getDate()-n);return d.toISOString().slice(0,10);};
+const monthsAgo=n=>{const d=new Date();d.setMonth(d.getMonth()-n);return d;};
+const fmtD=d=>{if(!d)return'—';const x=new Date(d+'T00:00:00');return x.toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'});};
+const LEVEL_COLOR={Low:'#34d399',Medium:'#fbbf24',High:'#fb923c',Critical:'#f87171'};
+const COMP_COLOR={'Compliant':'#34d399','Partially Compliant':'#fbbf24','Non-Compliant':'#f87171'};
+const compPctOf=f=>Math.round(f.reqs.filter(r=>r.done).length/f.reqs.length*100);
+const compStatus=p=>p>=90?'Compliant':p>=50?'Partially Compliant':'Non-Compliant';
+const riskLevel=s=>s>=17?'Critical':s>=10?'High':s>=5?'Medium':'Low';
+const calcRisk=(l,i)=>({score:l*i,level:riskLevel(l*i)});
+
+/* ═════════ SECURITY LAYER ═════════ */
+function xorEnc(s){const k='GRCSHIELD2026!';let o='';for(let i=0;i<s.length;i++)o+=String.fromCharCode(s.charCodeAt(i)^k.charCodeAt(i%k.length));return btoa(unescape(encodeURIComponent(o)));}
+function xorDec(b){try{const k='GRCSHIELD2026!';const s=decodeURIComponent(escape(atob(b)));let o='';for(let i=0;i<s.length;i++)o+=String.fromCharCode(s.charCodeAt(i)^k.charCodeAt(i%k.length));return o;}catch(e){return null;}}
+function secState(){try{const r=localStorage.getItem('grcshield_sec');return r?JSON.parse(xorDec(r)||'{}'):{};}catch(e){return{};}}
+function secSave(s){try{localStorage.setItem('grcshield_sec',xorEnc(JSON.stringify(s)));}catch(e){}}
+function secFail(email){const s=secState();s.fails=s.fails||{};s.fails[email]=(s.fails[email]||0)+1;secSave(s);return s.fails[email];}
+function secReset(email){const s=secState();if(s.fails)delete s.fails[email];secSave(s);}
+function secLock(email,secs){const s=secState();s.locks=s.locks||{};s.locks[email]=Date.now()+secs*1000;secSave(s);}
+function secLocked(email){const l=(secState().locks||{})[email]||0;return Math.max(0,Math.ceil((l-Date.now())/1000));}
+function recordLogin(email,ok){DB.loginHistory=DB.loginHistory||[];DB.loginHistory.unshift({email,ok,time:new Date().toLocaleString()});DB.loginHistory=DB.loginHistory.slice(0,100);}
+function pwScore(p){let sc=0;if(p.length>=8)sc++;if(p.length>=12)sc++;if(/[A-Z]/.test(p)&&/[a-z]/.test(p))sc++;if(/\d/.test(p))sc++;if(/[^A-Za-z0-9]/.test(p))sc++;return sc;}
+function pwLabel(s){return['Very weak','Weak','Fair','Good','Strong','Excellent'][s];}
+let sessTimer=null,sessArmed=false;
+function startSessionWatch(){if(sessArmed)return;sessArmed=true;['click','keydown','scroll','touchstart'].forEach(ev=>document.addEventListener(ev,resetSessTimer,{passive:true}));resetSessTimer();}
+function resetSessTimer(){clearTimeout(sessTimer);sessTimer=setTimeout(()=>{if(session){toast('Session timed out after 30 minutes of inactivity.','error');logout();}},30*60*1000);}
+
+/* Demo-grade password hash (NOT for production) */
+function hashPassword(p){let h1=0xdeadbeef,h2=0x41c6ce57;for(let i=0;i<p.length;i++){const c=p.charCodeAt(i);h1=Math.imul(h1^c,2654435761);h2=Math.imul(h2^c,1597334677);}h1=Math.imul(h1^(h1>>>16),2246822507)^Math.imul(h2^(h2>>>13),3266489909);h2=Math.imul(h2^(h2>>>16),2246822507)^Math.imul(h1^(h1>>>13),3266489909);return (h2>>>0).toString(16).padStart(8,'0')+(h1>>>0).toString(16).padStart(8,'0');}
+
+/* ═════════ DATABASE (localStorage-persistent) ═════════ */
+const DB_KEY='grcshield_db_v2', SESS_KEY='grcshield_session_v1';
+let DB=null;
+function seed(){
+  const users=[
+    {id:'u-1001',name:'ASWA CH',email:'admin@cybertech.io',pass:hashPassword('Admin@123'),title:'Chief Information Security Officer',role:'Admin',active:true,created:daysAgo(420)},
+    {id:'u-1002',name:'Marcus Webb',email:'officer@cybertech.io',pass:hashPassword('Officer@123'),title:'Security Officer',role:'Security Officer',active:true,created:daysAgo(380)},
+    {id:'u-1003',name:'Priya Nair',email:'viewer@cybertech.io',pass:hashPassword('Viewer@123'),title:'Compliance Analyst',role:'Viewer',active:true,created:daysAgo(210)},
+    {id:'u-1004',name:'Elena Fischer',email:'elena.fischer@cybertech.io',pass:hashPassword('Officer@123'),title:'Senior Internal Auditor',role:'Security Officer',active:true,created:daysAgo(365)},
+    {id:'u-1005',name:'Kwame Osei',email:'k.osei@cybertech.io',pass:hashPassword('Officer@123'),title:'External QSA Auditor',role:'Viewer',active:true,created:daysAgo(190)},
+    {id:'u-1006',name:'Daniel Mensah',email:'daniel.mensah@cybertech.io',pass:hashPassword('Officer@123'),title:'SOC Team Lead',role:'Security Officer',active:true,created:daysAgo(340)},
+    {id:'u-1007',name:'Fatima Rahman',email:'fatima.rahman@cybertech.io',pass:hashPassword('Viewer@123'),title:'GRC Analyst',role:'Viewer',active:true,created:daysAgo(160)},
+    {id:'u-1008',name:'Jonas Lindqvist',email:'jonas.lindqvist@cybertech.io',pass:hashPassword('Officer@123'),title:'Cloud Security Architect',role:'Security Officer',active:true,created:daysAgo(300)},
+    {id:'u-1009',name:'Anita Desai',email:'anita.desai@cybertech.io',pass:hashPassword('Viewer@123'),title:'Data Protection Officer',role:'Viewer',active:true,created:daysAgo(275)},
+    {id:'u-1010',name:'Tomas Silva',email:'tomas.silva@cybertech.io',pass:hashPassword('Viewer@123'),title:'Risk Analyst',role:'Viewer',active:true,created:daysAgo(140)},
+    {id:'u-1011',name:'Grace Okafor',email:'grace.okafor@cybertech.io',pass:hashPassword('Officer@123'),title:'Incident Response Lead',role:'Security Officer',active:true,created:daysAgo(255)},
+    {id:'u-1012',name:'Ryan Cooper',email:'ryan.cooper@cybertech.io',pass:hashPassword('Viewer@123'),title:'IT Operations Engineer',role:'Viewer',active:true,created:daysAgo(120)},
+    {id:'u-1013',name:'Mei Lin',email:'mei.lin@cybertech.io',pass:hashPassword('Officer@123'),title:'Third-Party Risk Manager',role:'Security Officer',active:true,created:daysAgo(230)},
+    {id:'u-1014',name:'Ibrahim Yusuf',email:'ibrahim.yusuf@cybertech.io',pass:hashPassword('Viewer@123'),title:'Helpdesk Team Lead',role:'Viewer',active:true,created:daysAgo(95)},
+    {id:'u-1015',name:'Sara Bergman',email:'sara.bergman@cybertech.io',pass:hashPassword('Viewer@123'),title:'HR Business Partner',role:'Viewer',active:true,created:daysAgo(80)},
+    {id:'u-1016',name:'Kwame Boateng',email:'kwame.boateng@cybertech.io',pass:hashPassword('Officer@123'),title:'Network Security Engineer',role:'Security Officer',active:true,created:daysAgo(200)},
+    {id:'u-1017',name:'Lucia Moretti',email:'lucia.moretti@cybertech.io',pass:hashPassword('Viewer@123'),title:'Legal Counsel',role:'Viewer',active:true,created:daysAgo(310)},
+    {id:'u-1018',name:'Oliver Grant',email:'oliver.grant@cybertech.io',pass:hashPassword('Viewer@123'),title:'Former Contractor',role:'Viewer',active:false,created:daysAgo(500)},
+  ];
+  const R=(id,title,desc,cat,l,i,owner,plan,status,ago)=>({id,title,desc,cat,l,i,score:l*i,level:riskLevel(l*i),owner,plan,status,created:daysAgo(ago)});
+  const risks=[
+    R('RSK-001','Phishing Attack','Targeted spear-phishing campaigns against finance staff using lookalike vendor domains.','Cyber',4,4,'Marcus Webb','Deploy DMARC/DKIM, run quarterly phishing simulations, mandatory awareness training.','Mitigating',158),
+    R('RSK-002','Ransomware','Encrypting malware detonated via exposed RDP or phishing payload halting operations.','Cyber',3,5,'ASWA CH','EDR on all endpoints, immutable offline backups, network segmentation, RDP behind VPN+MFA.','Mitigating',144),
+    R('RSK-003','Data Breach','Exfiltration of customer PII from production database via SQL injection or stolen creds.','Cyber',3,5,'Marcus Webb','WAF, parameterized queries, least-privilege DB accounts, DLP monitoring.','Monitoring',135),
+    R('RSK-004','Unauthorized Access','Former employees or contractors retaining valid credentials after offboarding.','Operational',4,3,'Priya Nair','Automated deprovisioning tied to HR, quarterly access reviews, session timeouts.','Mitigating',121),
+    R('RSK-005','Weak Passwords','Users reusing breached or trivial passwords enabling credential-stuffing attacks.','Cyber',4,3,'Marcus Webb','Enforce MFA, 14-char passphrase policy, block breached-password lists via Azure AD.','Monitoring',112),
+    R('RSK-006','Insider Threat','Malicious or negligent insider mishandling confidential data or sabotaging systems.','Operational',2,5,'ASWA CH','UEBA anomaly detection, segregation of duties, clear termination procedures.','Assessing',109),
+    R('RSK-007','DDoS Attack','Volumetric denial-of-service against customer-facing portals during peak season.','Cyber',3,3,'Marcus Webb','CDN plus anycast scrubbing, rate limiting, runbook with upstream provider.','Monitoring',127),
+    R('RSK-008','Supply Chain Compromise','Compromised third-party software or vendor update injecting malware into our estate.','Third-Party',2,5,'ASWA CH','Vendor security assessments, SBOM tracking, staged patch rings.','Assessing',106),
+    R('RSK-009','Cloud Misconfiguration','Publicly exposed S3-equivalent storage buckets leaking sensitive company data.','Cloud',4,4,'Jonas Lindqvist','CSPM continuous scanning, IaC policy-as-code, public-access blocks by default.','Mitigating',116),
+    R('RSK-010','Unpatched Systems','Legacy servers missing critical patches exploitable by known CVEs.','Cyber',4,4,'Priya Nair','48h critical patch SLA, risk-based prioritization, compensating isolation for legacy.','Identified',111),
+    R('RSK-011','Social Engineering','Voice phishing of helpdesk to reset credentials of executives.','Cyber',3,3,'Marcus Webb','Callback verification for resets, helpdesk fraud training, VIP flagging.','Resolved',170),
+    R('RSK-012','Data Loss via Removable Media','Sensitive files copied to unencrypted USB drives and lost off-premises.','Operational',2,4,'Priya Nair','Block USB storage on endpoints, encrypted corporate devices only, DLP rules.','Monitoring',133),
+    R('RSK-013','Credential Stuffing','Automated login attempts using breached credential pairs against customer portal.','Cyber',4,3,'Daniel Mensah','Breached-password screening, adaptive MFA, bot detection at the edge.','Mitigating',98),
+    R('RSK-014','SQL Injection','Unsanitized input reaching database queries on legacy internal applications.','Cyber',3,4,'Ryan Cooper','Parameterized queries, WAF virtual patching, secure code review gate.','Mitigating',94),
+    R('RSK-015','Backup Failure','Immutable backups silently failing, leaving no viable restore point for tier-1 systems.','Operational',3,4,'Ryan Cooper','Daily restore verification, backup monitoring alerts, quarterly DR test.','Mitigating',88),
+    R('RSK-016','Zero-Day Exploitation','Unknown vulnerability in an internet-facing appliance exploited before a patch exists.','Cyber',2,5,'Jonas Lindqvist','Virtual patching, EDR behavioural rules, strict egress filtering, threat intel feed.','Assessing',84),
+    R('RSK-017','Man-in-the-Middle','Interception of credentials or session tokens on untrusted networks.','Cyber',3,3,'Kwame Boateng','TLS everywhere, HSTS preload, VPN-only access to internal apps.','Monitoring',79),
+    R('RSK-018','Business Email Compromise','Spoofed executive mailbox instructing staff to change vendor bank details.','Cyber',4,4,'Marcus Webb','DMARC reject policy, out-of-band payment verification, finance dual control.','Mitigating',74),
+    R('RSK-019','DNS Hijacking','Registrar account takeover redirecting corporate domains to attacker infrastructure.','Cyber',2,4,'Kwame Boateng','Registrar MFA plus registry lock, DNSSEC, monitoring of DNS record drift.','Resolved',150),
+    R('RSK-020','Web Shell Upload','Attacker uploading a persistent shell through an unrestricted file upload endpoint.','Cyber',2,5,'Daniel Mensah','File-type allowlisting, upload directory outside webroot, integrity monitoring.','Assessing',68),
+    R('RSK-021','API Abuse','Unthrottled public APIs scraped or abused to enumerate customer records.','Cyber',3,4,'Jonas Lindqvist','Per-key rate limits, schema validation, anomaly detection on API gateways.','Mitigating',64),
+    R('RSK-022','Single Point of Failure','One core network device or database cluster whose loss halts all services.','Operational',3,4,'Kwame Boateng','Redundant HA pairs, failover drills, documented recovery runbooks.','Mitigating',60),
+    R('RSK-023','Vendor Data Sharing','Third parties processing personal data beyond the agreed contractual scope.','Third-Party',3,4,'Mei Lin','DPA enforcement, annual vendor audits, data-minimisation clauses.','Monitoring',57),
+    R('RSK-024','Botnet Scraping','Automated scraping of pricing and inventory data degrading service quality.','Cyber',3,2,'Daniel Mensah','Bot management, CAPTCHA on high-value endpoints, IP reputation feeds.','Monitoring',53),
+    R('RSK-025','Change Management Failure','Unreviewed production change causing outage or security regression.','Operational',3,3,'Elena Fischer','Mandatory CAB approval, peer review, automated rollback, change freeze windows.','Assessing',49),
+    R('RSK-026','Certificate Expiry','Expired TLS certificate causing outage and browser trust warnings.','Cyber',3,3,'Ryan Cooper','Automated renewal via ACME, expiry monitoring with 30-day alerts.','Identified',46),
+    R('RSK-027','Fourth-Party Concentration','Critical sub-processor outage cascading through multiple key vendors.','Third-Party',2,4,'Mei Lin','Fourth-party mapping, exit plans, multi-vendor strategy for tier-1 services.','Assessing',43),
+    R('RSK-028','Key Person Dependency','Security operations knowledge concentrated in two engineers.','Operational',3,3,'ASWA CH','Runbook documentation, cross-training rotation, contractor bench agreement.','Monitoring',40),
+    R('RSK-029','Cross-Tenant Data Exposure','Cloud misconfiguration leaking one tenant data to another tenant.','Cloud',2,5,'Jonas Lindqvist','Tenant isolation tests, IAM boundary reviews, IaC guardrails.','Assessing',37),
+    R('RSK-030','Logging Blind Spots','Critical systems sending no logs, preventing detection and forensics.','Cyber',4,3,'Daniel Mensah','Central SIEM onboarding, log-source health dashboard, mandatory retention.','Mitigating',34),
+    R('RSK-031','Open-Source Dependency Risk','Vulnerable or abandoned open-source library embedded in production code.','Third-Party',3,4,'Ryan Cooper','SCA scanning in CI, SBOM per release, licence and maintenance review.','Mitigating',31),
+    R('RSK-032','Cloud Account Takeover','Compromised cloud administrator identity granting full tenant control.','Cloud',3,5,'Jonas Lindqvist','Hardware MFA for admins, PIM just-in-time access, break-glass monitoring.','Mitigating',28),
+    R('RSK-033','Rogue Wi-Fi Access Point','Impersonation hotspot harvesting corporate credentials on site.','Cyber',2,3,'Kwame Boateng','802.1X with certificate validation, wireless IDS, staff awareness.','Monitoring',26),
+    R('RSK-034','Physical Theft of Laptop','Unattended laptop stolen from a vehicle or public space.','Physical',3,3,'Sara Bergman','Full-disk encryption, cable locks, remote wipe, clean-desk policy.','Mitigating',24),
+    R('RSK-035','Uncontrolled Cloud Spend','Unmonitored resources driving cost spikes and shadow workloads.','Cloud',3,2,'Jonas Lindqvist','Budget alerts, tagging policy, weekly cost anomaly review.','Monitoring',22),
+    R('RSK-036','GDPR Non-Compliance','Missing lawful basis or breach notification within 72 hours.','Compliance',3,4,'Anita Desai','Record of processing, DPIA gate, tested 72-hour notification runbook.','Mitigating',20),
+    R('RSK-037','AI-Generated Deepfake Fraud','Synthetic voice or video used to authorise fraudulent payments.','Cyber',2,4,'ASWA CH','Out-of-band verification, callback policy, finance awareness briefings.','Assessing',18),
+    R('RSK-038','Inadequate Security Training','Staff unable to recognise phishing or report incidents promptly.','Operational',4,2,'Sara Bergman','Onboarding plus annual training, monthly micro-learning, completion KPI.','Mitigating',16),
+    R('RSK-039','PCI Scope Creep','Cardholder data spreading into systems outside the assessed scope.','Compliance',3,3,'Priya Nair','Network segmentation, quarterly scope review, tokenisation at entry points.','Assessing',14),
+    R('RSK-040','Missing DPIA','New processing activity launched without a data protection impact assessment.','Compliance',3,3,'Anita Desai','DPIA mandatory gate in change process, privacy champions per department.','Identified',12),
+    R('RSK-041','Records Retention Breach','Personal data retained beyond the documented retention schedule.','Compliance',2,3,'Lucia Moretti','Automated retention rules, quarterly purge reports, disposal certificates.','Monitoring',10),
+    R('RSK-042','Tailgating into Data Centre','Unauthorised person following staff through a secured door.','Physical',2,4,'Kwame Boateng','Mantrap entry, badge-plus-PIN, CCTV review, visitor escort policy.','Mitigating',9),
+    R('RSK-043','Environmental Failure','Fire, flood or cooling loss taking the primary data centre offline.','Physical',1,5,'Ryan Cooper','Suppression systems, dual power feeds, tested DR site failover.','Assessing',8),
+    R('RSK-044','Legacy Application Support','Unsupported application with no vendor patches still holding business data.','Operational',3,4,'Elena Fischer','Compensating controls, network isolation, documented migration roadmap.','Identified',7),
+    R('RSK-045','Mobile Device Loss','Unmanaged personal phone holding corporate email and files.','Operational',3,3,'Sara Bergman','MDM enrolment, containerised corporate apps, remote wipe on BYOD.','Monitoring',6),
+    R('RSK-046','Insider Exfiltration via Cloud Sync','Staff syncing confidential files to personal cloud storage.','Operational',2,4,'Daniel Mensah','CASB policy, block personal cloud domains, DLP alerting on bulk uploads.','Assessing',5),
+    R('RSK-047','Weak Vendor Access Controls','Third-party support accounts with standing privileged access.','Third-Party',3,4,'Mei Lin','Just-in-time vendor access, session recording, quarterly recertification.','Mitigating',4),
+    R('RSK-048','Unmonitored Admin Sessions','Privileged sessions with no recording or approval trail.','Cyber',3,4,'Daniel Mensah','PAM vaulting, session recording, approval workflow for elevated tasks.','Assessing',2),
+  ];
+  const P=(id,name,desc,owner,status,ago,upd)=>({id,name,desc,owner,status,created:daysAgo(ago),updated:daysAgo(upd)});
+  const policies=[
+    P('POL-001','Password Security Policy','Minimum 14-character passphrases, MFA for all remote and privileged access, no password reuse, manager-approved vault storage.','ASWA CH','Approved',300,12),
+    P('POL-002','Access Control Policy','Role-based least-privilege access, joiner-mover-leaver process, quarterly access recertification, privileged access via PAM.','ASWA CH','Approved',280,8),
+    P('POL-003','Data Protection Policy','Classification of data as Public/Internal/Confidential/Restricted, encryption at rest and in transit, retention and secure disposal schedules.','Priya Nair','Approved',260,5),
+    P('POL-004','Acceptable Use Policy','Rules for corporate device and network usage, prohibited activities, monitoring notice, software installation restrictions.','Marcus Webb','Approved',240,40),
+    P('POL-005','Employee Security Responsibilities','All staff must complete annual security training, report suspicious activity within 1 hour, and follow clean-desk practices.','Priya Nair','Pending Approval',200,2),
+    P('POL-006','Incident Response Policy','Defines severity matrix, CSIRT roles, 30-minute escalation for Critical incidents, and post-incident review requirements.','ASWA CH','Pending Approval',150,1),
+    P('POL-007','Business Continuity and DR Policy','RTO of 4h and RPO of 15min for tier-1 systems, annual failover test, alternate site procedures.','Marcus Webb','Draft',90,3),
+    P('POL-008','Remote Work Security Policy','VPN required off-site, home router hardening baseline, no public Wi-Fi for sensitive work, privacy screen requirement.','Priya Nair','Draft',60,6),
+    P('POL-009','Vulnerability Management Policy','Monthly authenticated scanning, 48h critical patch SLA, exception register with risk acceptance by the CISO.','Ryan Cooper','Approved',220,18),
+    P('POL-010','Logging and Monitoring Policy','Centralised log retention of 12 months, SIEM use cases reviewed quarterly, tamper-evident storage.','Daniel Mensah','Approved',210,15),
+    P('POL-011','Third-Party Risk Management Policy','Tiering of vendors, pre-contract due diligence, annual reassessment for tier-1 suppliers, right-to-audit clause.','Mei Lin','Approved',195,22),
+    P('POL-012','Cloud Security Policy','Approved cloud services register, mandatory CSPM, IAM boundary rules, no production data in personal tenants.','Jonas Lindqvist','Approved',185,11),
+    P('POL-013','Data Retention and Disposal Policy','Defined retention schedule per record class, certified destruction, quarterly purge reporting.','Lucia Moretti','Approved',175,9),
+    P('POL-014','Cryptography Policy','Approved algorithms only, key management lifecycle, HSM for root keys, annual key rotation.','Jonas Lindqvist','Approved',168,26),
+    P('POL-015','Security Awareness and Training Policy','Onboarding training within 5 days, annual refresher, monthly phishing simulation, completion tracked per department.','Sara Bergman','Approved',160,7),
+    P('POL-016','Change Management Policy','CAB approval for standard and emergency changes, peer review, automated rollback, documented change freeze windows.','Elena Fischer','Approved',152,14),
+    P('POL-017','Physical and Environmental Security Policy','Mantrap entry to data centre, CCTV retention of 90 days, visitor escort, fire suppression testing.','Kwame Boateng','Approved',145,19),
+    P('POL-018','Endpoint Security Policy','EDR agent mandatory on all endpoints, full-disk encryption, USB storage blocked by default.','Marcus Webb','Approved',140,10),
+    P('POL-019','Backup and Recovery Policy','3-2-1 backup rule, immutable copies, monthly restore test with documented evidence.','Ryan Cooper','Pending Approval',132,4),
+    P('POL-020','Mobile Device and BYOD Policy','MDM enrolment required, containerised corporate apps, remote wipe consent at enrolment.','Sara Bergman','Pending Approval',125,5),
+    P('POL-021','AI and Emerging Technology Policy','Approved-use register for generative AI tools, no confidential data in public models, human review of outputs.','ASWA CH','Draft',70,4),
+    P('POL-022','Privacy Notice and Consent Policy','Layered privacy notices, consent records with withdrawal mechanism, DPIA gate for high-risk processing.','Anita Desai','Draft',55,2),
+    P('POL-023','Privileged Access Management Policy','Just-in-time elevation, session recording for admin sessions, quarterly recertification of privileged groups.','Daniel Mensah','Draft',42,3),
+    P('POL-024','Secure Development Lifecycle Policy','Threat modelling per release, SAST and SCA in CI, security sign-off before production deployment.','Ryan Cooper','Draft',30,1),
+  ];
+  const F=(id,name,desc,assessDate,reqs)=>({id,name,desc,assessDate,reqs,evidence:[]});
+  const req=(id,text,done)=>({id,text,done});
+  const frameworks=[
+    F('FRW-001','ISO/IEC 27001:2022','International standard for Information Security Management Systems (ISMS) — Annex A controls and continuous improvement.',daysAgo(20),[
+      req('A.5.1','Policies for information security defined, approved and communicated',true),
+      req('A.5.2','Information security roles and responsibilities assigned',true),
+      req('A.5.7','Threat intelligence collected and analysed',true),
+      req('A.5.14','Information transfer rules in place',true),
+      req('A.5.15','Access control policy established',true),
+      req('A.5.17','Authentication information managed securely',true),
+      req('A.5.23','Cloud service security responsibilities defined',true),
+      req('A.6.3','Security awareness and training programme running',true),
+      req('A.7.4','Physical security monitoring in place',true),
+      req('A.8.1','User endpoint devices protected',true),
+      req('A.8.8','Technical vulnerability management applied',false),
+      req('A.8.16','Monitoring activities documented',true),
+      req('A.8.24','Cryptography used to protect data at rest',false),
+      req('A.8.32','Change management process implemented',false),
+      req('A.8.34','Protection of information during testing',false)]),
+    F('FRW-002','GDPR','EU General Data Protection Regulation — lawful processing, data-subject rights, privacy by design and breach notification.',daysAgo(12),[
+      req('Art.5','Lawful, fair and transparent processing principles',true),
+      req('Art.6','Lawful basis documented for all processing',true),
+      req('Art.7','Consent records maintained where relied upon',true),
+      req('Art.12','Privacy notices provided to data subjects',true),
+      req('Art.15','Right of access procedure operational',true),
+      req('Art.17','Right to erasure procedure operational',false),
+      req('Art.20','Right to data portability supported',false),
+      req('Art.30','Records of processing activities maintained',true),
+      req('Art.32','Security of processing (encryption, CIA of systems)',true),
+      req('Art.33','72-hour breach notification process',false),
+      req('Art.35','DPIAs conducted for high-risk processing',true),
+      req('Art.37','DPO appointed and registered',false)]),
+    F('FRW-003','PCI DSS v4.0','Payment Card Industry Data Security Standard — protects cardholder data across people, processes and technology.',daysAgo(8),[
+      req('R1','Network security controls configured and maintained',true),
+      req('R2','Secure configurations applied to all system components',true),
+      req('R3','Stored account data protected (encryption, truncation)',true),
+      req('R4','Cardholder data encrypted in transit',false),
+      req('R5','Malware and anti-phishing defenses deployed',true),
+      req('R6','Secure software development lifecycle followed',false),
+      req('R7','Access to system components restricted by need-to-know',true),
+      req('R8','Users identified and authenticated (MFA)',true),
+      req('R9','Physical access to cardholder data restricted',true),
+      req('R10','Access to system components logged and monitored',true),
+      req('R11','Security posture tested regularly',false),
+      req('R12','Info security policy for all personnel maintained',false)]),
+    F('FRW-004','NIST Cybersecurity Framework 2.0','Voluntary framework organised around Govern, Identify, Protect, Detect, Respond and Recover functions.',daysAgo(18),[
+      req('GV.OC','Organisational context understood and documented',true),
+      req('GV.RM','Risk management strategy established and communicated',true),
+      req('GV.RR','Roles, responsibilities and authorities defined',true),
+      req('GV.PO','Policy for managing cybersecurity risk established',true),
+      req('GV.SC','Supply chain risk management integrated',false),
+      req('ID.AM','Asset inventory and mapping maintained',true),
+      req('ID.RA','Risk assessment process executed periodically',true),
+      req('PR.AA','Identities and access managed and authenticated',true),
+      req('PR.AT','Personnel trained and aware of responsibilities',true),
+      req('PR.DS','Data secured consistent with risk strategy',false),
+      req('PR.PS','Platform security managed across lifecycle',false),
+      req('DE.CM','Assets monitored to find anomalies',true),
+      req('DE.AE','Adverse events analysed and reported',false),
+      req('RS.MA','Incident response managed and executed',true),
+      req('RS.CO','Incident response activities coordinated with stakeholders',false),
+      req('RC.RP','Recovery plan executed and improvements applied',false)]),
+    F('FRW-005','SOC 2 Type II','Trust Services Criteria covering security, availability, processing integrity, confidentiality and privacy over an audit period.',daysAgo(25),[
+      req('CC1.1','Control environment demonstrates commitment to integrity',true),
+      req('CC2.1','Relevant security information communicated internally',true),
+      req('CC3.1','Objectives specified to identify and assess risks',true),
+      req('CC4.1','Monitoring activities evaluate control effectiveness',true),
+      req('CC5.1','Control activities selected to mitigate risks',false),
+      req('CC6.1','Logical access controls restrict unauthorised access',true),
+      req('CC6.6','External threats detected and prevented at the boundary',false),
+      req('CC6.8','Unauthorised or malicious software prevented',true),
+      req('CC7.2','Security events monitored and anomalies detected',true),
+      req('CC7.3','Security incidents evaluated and triaged',false),
+      req('CC8.1','Changes to infrastructure authorised and tested',false),
+      req('CC9.2','Vendor and business partner risk managed',false)]),
+    F('FRW-006','HIPAA Security Rule','US healthcare security requirements for administrative, physical and technical safeguards over electronic protected health information.',daysAgo(30),[
+      req('164.308(a)(1)','Security management process and risk analysis',true),
+      req('164.308(a)(3)','Workforce security and authorisation controls',true),
+      req('164.308(a)(4)','Information access management implemented',false),
+      req('164.308(a)(5)','Security awareness and training programme',true),
+      req('164.308(a)(6)','Security incident procedures documented',true),
+      req('164.308(a)(7)','Contingency and disaster recovery plan',false),
+      req('164.310(a)(1)','Facility access controls enforced',true),
+      req('164.310(d)(1)','Device and media controls implemented',true),
+      req('164.312(a)(1)','Access control mechanisms enforced',true),
+      req('164.312(b)','Audit controls recording system activity',false),
+      req('164.312(c)(1)','Integrity controls protecting ePHI',false),
+      req('164.312(e)(1)','Transmission security for ePHI in transit',false)]),
+    F('FRW-007','CIS Controls v8','Prioritised set of 18 safeguards for cyber defence, grouped into basic, foundational and organisational hygiene.',daysAgo(15),[
+      req('CIS 1','Inventory and control of enterprise assets',true),
+      req('CIS 2','Inventory and control of software assets',true),
+      req('CIS 3','Data protection practices applied',true),
+      req('CIS 4','Secure configuration of enterprise assets and software',true),
+      req('CIS 5','Account management controls applied',true),
+      req('CIS 6','Access control management implemented',true),
+      req('CIS 7','Continuous vulnerability management',false),
+      req('CIS 8','Audit log management centralised',true),
+      req('CIS 9','Email and web browser protections deployed',true),
+      req('CIS 10','Malware defenses implemented',true),
+      req('CIS 11','Data recovery practices tested',false),
+      req('CIS 12','Network infrastructure management controlled',false),
+      req('CIS 13','Network monitoring and defence operating',false),
+      req('CIS 14','Security awareness and skill training running',true),
+      req('CIS 15','Service provider management governed',false),
+      req('CIS 16','Application software security assured',false),
+      req('CIS 17','Incident response management exercised',true),
+      req('CIS 18','Penetration testing performed periodically',false)]),
+  ];
+  const A=(id,title,type,auditor,start,due,status,findings,recs)=>({id,title,type,auditor,start,due,status,findings,recs,checklist:[{t:'Scope and evidence request confirmed',d:true},{t:'Control design walkthrough completed',d:status==='Completed'},{t:'Sample testing performed',d:status==='Completed'},{t:'Findings draft reviewed',d:false}]});
+  const audits=[
+    A('AUD-001','Internal ISMS Audit 2026','Internal','Elena Fischer',daysAgo(60),daysAgo(45),'Completed','3 minor findings: patch SLA drift on 2 servers; training records incomplete for 4 contractors.','Enforce 48h critical patch SLA with exception register; automate training tracking.'),
+    A('AUD-002','PCI DSS Readiness Assessment','External','K. Osei (QSA)',daysAgo(35),daysAgo(20),'Completed','TLS 1.0 still enabled on one legacy payment hop; segmentation test pending.','Disable legacy TLS, complete quarterly segmentation scan.'),
+    A('AUD-003','GDPR Compliance Audit','Internal','Priya Nair',daysAgo(15),daysAgo(1),'Completed','DPIA missing for new analytics platform; erasure SLA not tracked.','Complete DPIA before go-live; add erasure KPI to compliance dashboard.'),
+    A('AUD-004','Cloud Security Configuration Review','Internal','Jonas Lindqvist',daysAgo(5),daysAgo(-14),'In Progress','',''),
+    A('AUD-005','Vendor Security Assessment — NovaPay','Third-Party','Mei Lin',daysAgo(-30),daysAgo(-10),'Scheduled','',''),
+    A('AUD-006','ISO 27001 Surveillance Audit','External','Certification Body Ltd',daysAgo(120),daysAgo(95),'Completed','2 minor nonconformities on supplier monitoring evidence and asset return process.','Close NCs within 60 days, provide objective evidence to the auditor.'),
+    A('AUD-007','SOC 2 Type II Readiness Review','External','Grant Advisory LLP',daysAgo(88),daysAgo(70),'Completed','Change management evidence incomplete for emergency changes.','Implement emergency change tickets with retrospective CAB review.'),
+    A('AUD-008','Internal Penetration Test — Web Apps','Third-Party','RedTeamX',daysAgo(75),daysAgo(63),'Completed','1 high (stored XSS), 3 medium findings; no critical findings.','Remediate high finding within 14 days; retest evidence attached.'),
+    A('AUD-009','Network Segmentation Validation','Internal','Kwame Boateng',daysAgo(52),daysAgo(38),'Completed','Flat network segment discovered between lab and production VLANs.','Implement ACLs, re-run segmentation scan, document rule ownership.'),
+    A('AUD-010','Data Retention and Disposal Audit','Internal','Lucia Moretti',daysAgo(44),daysAgo(29),'Completed','Retention schedule not applied to 3 legacy SharePoint libraries.','Automate retention labels, quarterly purge report to DPO.'),
+    A('AUD-011','Privileged Access Review','Internal','Daniel Mensah',daysAgo(30),daysAgo(16),'Completed','2 dormant admin accounts still enabled; no session recording on 1 jump host.','Disable dormant accounts, enable PAM session recording.'),
+    A('AUD-012','Incident Response Tabletop Exercise','Internal','Grace Okafor',daysAgo(26),daysAgo(21),'Completed','Escalation contact list outdated; comms templates missing for regulator notice.','Refresh call tree monthly, pre-approve regulator notification templates.'),
+    A('AUD-013','Backup and Restore Verification','Internal','Ryan Cooper',daysAgo(20),daysAgo(12),'Completed','1 of 6 restore tests exceeded the 4h RTO by 55 minutes.','Tune restore runbook, move cold data to faster tier.'),
+    A('AUD-014','Phishing Simulation Effectiveness Review','Internal','Marcus Webb',daysAgo(18),daysAgo(9),'Completed','Click rate fell from 11% to 4.2%; reporting rate rose to 68%.','Continue quarterly cadence, target finance and sales teams.'),
+    A('AUD-015','HIPAA Safeguards Assessment','External','HealthGuard Compliance',daysAgo(10),daysAgo(-20),'In Progress','',''),
+    A('AUD-016','CIS Controls Gap Assessment','Internal','Fatima Rahman',daysAgo(7),daysAgo(-7),'In Progress','',''),
+    A('AUD-017','Business Continuity Failover Test','Internal','Ryan Cooper',daysAgo(-4),daysAgo(-25),'Scheduled','',''),
+    A('AUD-018','Third-Party Assessment — CloudBase Hosting','Third-Party','Mei Lin',daysAgo(-9),daysAgo(-40),'Scheduled','',''),
+    A('AUD-019','Internal ISMS Audit 2027','Internal','Elena Fischer',daysAgo(-45),daysAgo(-70),'Scheduled','',''),
+    A('AUD-020','Mobile Device Management Compliance Check','Internal','Sara Bergman',daysAgo(58),daysAgo(42),'Completed','14 personal devices enrolled without containerisation.','Enforce MDM profile, block mail sync on non-compliant devices.'),
+  ];
+  const I=(id,title,cls,sev,desc,date,officer,status,actions,notes,timeline)=>({id,title,cls,sev,desc,date,officer,status,actions,notes,timeline});
+  const incidents=[
+    I('INC-001','Phishing Email — Fake Invoice','Phishing','Medium','Finance employee received spoofed vendor invoice with malicious HTML attachment; attachment detonated in sandbox only.',daysAgo(68),'Marcus Webb','Resolved','Blocked sender domain, purged mailbox items, ran targeted phishing refresher.','No credential entry occurred; user reported within 20 minutes.',[{t:'09:12',x:'Reported by finance employee'},{t:'09:40',x:'Mailbox purge executed'},{t:'11:05',x:'Threat intel confirmed campaign IOCs'},{t:'15:30',x:'Closed — user coaching completed'}]),
+    I('INC-002','Malware Infection — Endpoint','Malware','High','Emotet-laced macro document executed on a sales laptop; EDR flagged C2 beaconing.',daysAgo(64),'Daniel Mensah','Resolved','Host isolated from network, reimaged, credentials reset, C2 domains sinkholed.','Clean reimage verified; no lateral movement detected.',[{t:'08:47',x:'EDR alert: C2 beaconing'},{t:'08:52',x:'Host quarantined automatically'},{t:'10:15',x:'Reimage completed'},{t:'13:00',x:'Resolved'}]),
+    I('INC-003','Unauthorized Login — VPN','Unauthorized Access','High','VPN login from unusual geolocation succeeded before MFA push denial; password later found in breach corpus.',daysAgo(61),'ASWA CH','Contained','Disabled account, forced global password reset, enabled geo-fencing, reviewed VPN logs for persistence.','Attacker did not pass MFA; session terminated within 4 minutes.',[{t:'22:03',x:'Anomalous login alert'},{t:'22:07',x:'Account disabled'},{t:'23:30',x:'Log review — no further activity'},{t:'Next 09:00',x:'Geo-fencing enabled'}]),
+    I('INC-004','Data Leakage — Shared Drive','Data Breach','Medium','Intern folder on shared drive was readable by all staff; contained 120 customer records. No external access logged.',daysAgo(57),'Priya Nair','Resolved','Permissions corrected, DLP rule added, intern offboarding checklist updated.','Confirmed no external exfiltration via proxy/DLP logs.',[{t:'10:20',x:'Discovered during routine audit'},{t:'10:35',x:'Access revoked'},{t:'14:00',x:'DLP rule deployed'},{t:'16:10',x:'Resolved'}]),
+    I('INC-005','Ransomware Attempt — Server','Ransomware','Critical','EDR halted encryption routine on file server after suspicious mass-rename behavior; shadow copies intact.',daysAgo(52),'ASWA CH','Investigating','Server isolated, forensic image taken, IOC sweep across estate, restoring from immutable backups as precaution.','Preliminary analysis: initial access via unpatched VPN appliance.',[{t:'02:14',x:'EDR ransomware behavior block'},{t:'02:20',x:'Server network-isolated'},{t:'06:40',x:'Forensic image acquired'},{t:'09:00',x:'IOC sweep 60% complete'}]),
+    I('INC-006','Suspicious Outbound Traffic','Network','Low','IDS flagged periodic small outbound beacons from a test VM; confirmed misconfigured telemetry agent.',daysAgo(49),'Marcus Webb','Resolved','Verifying agent configuration and rebuilding VM from template.','No malicious payload found; monitoring continues.',[{t:'16:44',x:'IDS alert raised'},{t:'17:10',x:'Identified as telemetry misconfiguration'},{t:'18:05',x:'VM rebuilt and returned to service'}]),
+    I('INC-007','Lost Company Laptop','Other','High','Encrypted laptop left in a taxi by a sales manager; contained cached email but no local customer database.',daysAgo(46),'Sara Bergman','Resolved','Remote wipe issued, police report filed, device written off, asset register updated.','Disk encryption confirmed enabled; residual risk accepted by CISO.',[{t:'19:20',x:'Loss reported by employee'},{t:'19:45',x:'Remote wipe command queued'},{t:'Next 08:00',x:'Wipe confirmed on next check-in attempt'},{t:'11:30',x:'Risk acceptance recorded'}]),
+    I('INC-008','Brute Force on SSH','Unauthorized Access','Medium','Repeated failed SSH logins against a bastion host from three foreign IP ranges.',daysAgo(44),'Kwame Boateng','Resolved','Source ranges blocked at the edge, key-only auth enforced, fail2ban thresholds tightened.','No successful authentication observed in the logs.',[{t:'03:11',x:'Auth log anomaly detected'},{t:'03:25',x:'Source ranges blocked'},{t:'07:40',x:'Key-only authentication enforced'}]),
+    I('INC-009','Credential Stuffing on Customer Portal','Unauthorized Access','High','Spike of 40k login attempts with breached credential pairs; 12 accounts matched valid passwords.',daysAgo(41),'Daniel Mensah','Resolved','Forced reset for 12 accounts, enabled bot detection, added breached-password screening.','No fraudulent transactions recorded.',[{t:'01:05',x:'Login failure rate alert'},{t:'01:30',x:'Rate limiting engaged'},{t:'02:15',x:'Affected accounts reset'},{t:'09:00',x:'Post-incident review completed'}]),
+    I('INC-010','Misconfigured Storage Bucket','Data Breach','High','Object storage bucket with audit exports was publicly listable for approximately 6 hours.',daysAgo(38),'Jonas Lindqvist','Resolved','Bucket made private, access logs reviewed, CSPM rule added to block public ACLs.','Logs show only scanner user-agents accessed the bucket.',[{t:'11:10',x:'CSPM finding raised'},{t:'11:25',x:'Bucket set to private'},{t:'14:00',x:'Access log review completed'},{t:'16:20',x:'Guardrail policy deployed'}]),
+    I('INC-011','Spear Phishing — Executive Target','Phishing','High','CFO received a tailored message referencing a real merger project and asking to open a shared document.',daysAgo(35),'Marcus Webb','Resolved','Message quarantined tenant-wide, sender infrastructure blocked, executive briefing delivered.','No link clicks recorded from the executive team.',[{t:'08:30',x:'Message delivered and reported'},{t:'08:50',x:'Tenant-wide purge issued'},{t:'10:00',x:'Executive briefing held'}]),
+    I('INC-012','Volumetric DDoS Attack','Network','High','420 Gbps UDP flood against the public API edge during a marketing campaign.',daysAgo(33),'Kwame Boateng','Resolved','Scrubbing provider engaged, anycast absorption enabled, rate limits lowered for the campaign window.','Customer-facing latency degraded for 9 minutes only.',[{t:'13:02',x:'Traffic spike detected'},{t:'13:06',x:'Scrubbing engaged'},{t:'13:11',x:'Traffic normalised'},{t:'14:00',x:'Post-incident report filed'}]),
+    I('INC-013','Insider USB Copy Attempt','Data Breach','Medium','DLP blocked a bulk copy of 2,300 files to an unencrypted USB device on a departing employee laptop.',daysAgo(30),'Grace Okafor','Contained','Device blocked, HR and legal engaged, laptop recovered, exit interview escalated.','Investigation ongoing with legal counsel; no evidence of prior exfiltration.',[{t:'15:22',x:'DLP policy violation alert'},{t:'15:30',x:'Device blocked and logged'},{t:'16:10',x:'HR and legal notified'},{t:'Next 09:00',x:'Laptop recovered'}]),
+    I('INC-014','Exploitation Attempt — VPN Appliance','Other','Critical','Internet-facing VPN appliance probed with an exploit for a newly published CVE; virtual patch blocked the payload.',daysAgo(28),'ASWA CH','Contained','Emergency virtual patch applied, appliance isolated, firmware upgrade scheduled, IOCs hunted estate-wide.','No evidence of successful exploitation on this appliance.',[{t:'01:40',x:'WAF and IPS alerts correlated'},{t:'02:05',x:'Virtual patch applied'},{t:'04:30',x:'Estate-wide IOC hunt started'},{t:'08:00',x:'Vendor emergency firmware scheduled'}]),
+    I('INC-015','Malicious Browser Extension','Malware','Medium','Extension posing as a PDF reader injected ads and harvested form data on 6 marketing workstations.',daysAgo(26),'Daniel Mensah','Resolved','Extension blacklisted via policy, workstations cleaned, browser extension allowlist enforced.','No credential theft confirmed; sessions invalidated as a precaution.',[{t:'10:05',x:'Helpdesk ticket raised for pop-ups'},{t:'11:20',x:'Extension identified and blocked'},{t:'14:00',x:'Allowlist policy deployed'}]),
+    I('INC-016','Service Account Credential Sharing','Unauthorized Access','Medium','Deployment service account credentials found in a shared team wiki page.',daysAgo(24),'Ryan Cooper','Resolved','Credential rotated, wiki page purged, secret scanning enabled on internal repos.','Access logs show no anomalous use of the account.',[{t:'09:15',x:'Secret discovered during review'},{t:'09:35',x:'Credential rotated'},{t:'10:30',x:'Secret scanning enabled'}]),
+    I('INC-017','Email Spoofing of CEO','Phishing','Medium','External messages spoofing the CEO display name requested urgent gift-card purchases from three managers.',daysAgo(22),'Marcus Webb','Resolved','DMARC reject policy enforced, lookalike domains sinkholed, finance and admin staff briefed.','No purchases made; two users reported the message.',[{t:'11:00',x:'First report received'},{t:'11:25',x:'Sender domains blocked'},{t:'13:00',x:'DMARC policy tightened to reject'}]),
+    I('INC-018','Secret Leaked in Public Repository','Data Breach','High','Developer pushed an API key to a public GitHub repository; key granted read access to a staging bucket.',daysAgo(20),'Jonas Lindqvist','Resolved','Key revoked, repository made private, git history rewritten, pre-commit secret scanning added.','Staging data contained no production customer records.',[{t:'07:50',x:'Automated secret scanning alert'},{t:'08:05',x:'Key revoked'},{t:'09:30',x:'Repository made private'},{t:'11:00',x:'Pre-commit hook deployed'}]),
+    I('INC-019','Rogue Access Point in Office','Network','Low','Wireless IDS detected an access point broadcasting a lookalike corporate SSID in a meeting room.',daysAgo(18),'Kwame Boateng','Resolved','Device located and removed, 802.1X certificate validation enforced for all clients.','No client associated with the rogue SSID per controller logs.',[{t:'14:12',x:'Wireless IDS alert'},{t:'14:40',x:'Device physically located'},{t:'15:20',x:'Device removed from site'}]),
+    I('INC-020','Web Shell on Web Server','Malware','Critical','Integrity monitoring detected an unexpected PHP file in the uploads directory of a public web server.',daysAgo(16),'Grace Okafor','Contained','Server taken out of the load balancer, image preserved for forensics, rebuild from golden image, upload validation fixed.','Initial access vector is under review with the application team.',[{t:'03:18',x:'File integrity alert'},{t:'03:30',x:'Server removed from pool'},{t:'05:00',x:'Forensic image captured'},{t:'09:45',x:'Rebuilt server returned to service'}]),
+    I('INC-021','Third-Party Breach Notification — NovaPay','Data Breach','High','Payment processor notified us that a support portal account was compromised, potentially exposing merchant contact data.',daysAgo(14),'Mei Lin','Investigating','Vendor incident bridge opened, affected contact list requested, customer comms drafted, regulator assessment started.','No cardholder data or transaction records involved per vendor statement.',[{t:'10:00',x:'Vendor notification received'},{t:'10:45',x:'Incident bridge established'},{t:'Next 12:00',x:'Affected data categories confirmed'},{t:'Next 16:00',x:'Legal notified'}]),
+    I('INC-022','Admin Login from New Country','Unauthorized Access','High','Privileged console login from a country with no prior corporate activity, followed by MFA approval.',daysAgo(12),'Daniel Mensah','Investigating','Session terminated, admin credentials rotated, device posture check added, user interviewed.','User reports no travel; device is being forensically examined.',[{t:'06:22',x:'Impossible-travel alert'},{t:'06:30',x:'Session terminated'},{t:'07:15',x:'Credentials rotated'},{t:'10:00',x:'Endpoint collected for analysis'}]),
+    I('INC-023','USB Drop Attack Attempt','Other','Low','Unlabelled USB drives were found in the parking area and handed to the security desk unplugged.',daysAgo(10),'Marcus Webb','Resolved','Devices forensically examined in an isolated lab, awareness reminder sent to all staff.','Devices contained a benign autorun lure; no host was connected.',[{t:'08:10',x:'Devices handed to security desk'},{t:'09:30',x:'Forensic examination started'},{t:'11:00',x:'Staff awareness reminder sent'}]),
+    I('INC-024','Cloud Sync Exfiltration Attempt','Data Breach','High','CASB blocked a bulk sync of finance documents to a personal cloud storage account.',daysAgo(8),'Grace Okafor','Contained','Personal cloud domains blocked, user account reviewed, DLP threshold tightened, HR engaged.','No files left the corporate boundary; 0 bytes transferred.',[{t:'13:05',x:'CASB policy violation'},{t:'13:10',x:'Transfer blocked'},{t:'14:00',x:'Account review opened'},{t:'15:30',x:'Domain block list updated'}]),
+    I('INC-025','IoT Camera Default Credentials','Other','Medium','Facilities CCTV camera reachable from the corporate VLAN using vendor default credentials.',daysAgo(7),'Kwame Boateng','Contained','Camera moved to an isolated IoT VLAN, credentials changed, firmware updated, inventory corrected.','No external connections observed from the device.',[{t:'11:40',x:'Asset scan finding'},{t:'12:15',x:'Device moved to IoT VLAN'},{t:'13:00',x:'Credentials rotated'}]),
+    I('INC-026','Vishing Call to Helpdesk','Phishing','Medium','Caller impersonating a regional director attempted to obtain an MFA reset for a VIP account.',daysAgo(6),'Ibrahim Yusuf','Resolved','Helpdesk followed callback verification, caller number traced to a VoIP provider, VIP flag applied.','No reset was performed; procedure worked as designed.',[{t:'15:05',x:'Suspicious call received'},{t:'15:12',x:'Callback verification initiated'},{t:'15:40',x:'Call terminated and reported'}]),
+    I('INC-027','Container Escape Attempt','Other','Critical','Runtime security detected a privileged container spawning a host-level shell in the staging cluster.',daysAgo(5),'Jonas Lindqvist','Investigating','Pod terminated, node cordoned, admission policies tightened, image provenance review started.','Staging only; production clusters show no matching behaviour.',[{t:'04:02',x:'Runtime security alert'},{t:'04:10',x:'Pod terminated'},{t:'04:35',x:'Node cordoned and imaged'},{t:'09:00',x:'Admission policy updated'}]),
+    I('INC-028','Shadow IT SaaS Discovery','Other','Low','CASB discovered 14 unsanctioned SaaS applications used by marketing with corporate credentials.',daysAgo(4),'Fatima Rahman','Reported','Risk triage of each application, SSO migration for the top 3, blocking policy proposed.','None of the applications currently hold confidential data.',[{t:'10:00',x:'CASB discovery report reviewed'},{t:'11:30',x:'Applications triaged by risk'}]),
+    I('INC-029','Certificate Expiry Outage','Network','Medium','An internal service certificate expired, breaking SSO for the reporting portal for 38 minutes.',daysAgo(3),'Ryan Cooper','Resolved','Certificate renewed, ACME automation extended to internal services, expiry alert threshold widened.','User impact limited to reporting portal; no data exposure.',[{t:'08:02',x:'Portal errors reported'},{t:'08:20',x:'Expired certificate identified'},{t:'08:40',x:'Certificate renewed and service restored'}]),
+    I('INC-030','Ransomware Hoax Email','Ransomware','Low','Mass email claimed customer data was stolen and demanded payment in cryptocurrency.',daysAgo(2),'Grace Okafor','Resolved','Confirmed as a hoax against the breach corpus, message purged, staff communication issued.','No evidence of compromise; sample matches a known mass hoax campaign.',[{t:'09:30',x:'Multiple staff reports received'},{t:'10:15',x:'Sample analysed and confirmed hoax'},{t:'11:00',x:'All-staff communication sent'}]),
+    I('INC-031','API Key Leak in Mobile App','Data Breach','High','Hardcoded API key discovered in a production mobile build by an external researcher.',daysAgo(1),'Daniel Mensah','Investigating','Key rotated, mobile release withdrawn, secret management migration planned, researcher acknowledged.','Rate limits prevented bulk data retrieval; access logs under review.',[{t:'12:00',x:'Researcher disclosure received'},{t:'12:40',x:'Key rotated'},{t:'14:00',x:'Release withdrawn from stores'}]),
+    I('INC-032','DNS Tunnelling Detected','Network','Medium','DNS query volume anomaly suggested data encoding over DNS from a developer workstation.',daysAgo(0),'Kwame Boateng','Reported','Workstation isolated, DNS logging expanded, endpoint triage in progress.','Initial triage points to a misconfigured VPN client rather than malicious tooling.',[{t:'07:35',x:'DNS anomaly alert'},{t:'07:50',x:'Workstation isolated'},{t:'08:30',x:'Endpoint triage started'}]),
+  ];
+  const notifs=[
+    {id:'n1',icon:'alert-triangle',title:'Critical risk: Ransomware',body:'Risk RSK-002 scored 15 (High). Review treatment plan.',time:'2h ago',read:false},
+    {id:'n2',icon:'siren',title:'New security incident',body:'INC-032 — DNS tunnelling detected on a developer workstation.',time:'3h ago',read:false},
+    {id:'n3',icon:'shield-alert',title:'Critical incident open',body:'INC-027 — Container escape attempt is under investigation.',time:'1d ago',read:false},
+    {id:'n4',icon:'clipboard-check',title:'Audit in progress',body:'AUD-016 CIS Controls Gap Assessment is due soon.',time:'1d ago',read:false},
+    {id:'n5',icon:'file-check',title:'Policy approval requested',body:'POL-019 Backup and Recovery Policy awaits approval.',time:'1d ago',read:false},
+    {id:'n6',icon:'calendar-clock',title:'Compliance deadline',body:'PCI DSS quarterly segmentation scan due in 18 days.',time:'2d ago',read:true},
+    {id:'n7',icon:'check-square',title:'Compliance progress',body:'CIS Controls v8 moved to 61% completion.',time:'2d ago',read:true},
+    {id:'n8',icon:'alert-triangle',title:'New high risk added',body:'RSK-048 Unmonitored Admin Sessions scored 12 (High).',time:'3d ago',read:true},
+    {id:'n9',icon:'clipboard-check',title:'Audit completed',body:'AUD-014 Phishing Simulation Effectiveness Review is complete.',time:'4d ago',read:true},
+    {id:'n10',icon:'siren',title:'Incident resolved',body:'INC-029 Certificate Expiry Outage has been closed.',time:'4d ago',read:true},
+    {id:'n11',icon:'file-check',title:'Policy approved',body:'POL-016 Change Management Policy was approved.',time:'5d ago',read:true},
+    {id:'n12',icon:'bell',title:'New user registered',body:'Sara Bergman was added with Viewer access.',time:'6d ago',read:true},
+    {id:'n13',icon:'alert-triangle',title:'Risk review overdue',body:'RSK-044 Legacy Application Support has been Identified for 7 days.',time:'1w ago',read:true},
+    {id:'n14',icon:'check-square',title:'Evidence uploaded',body:'4 evidence files added to ISO/IEC 27001:2022.',time:'1w ago',read:true},
+    {id:'n15',icon:'siren',title:'Third-party notification',body:'NovaPay reported a support portal compromise (INC-021).',time:'2w ago',read:true},
+  ];
+  const logs=[
+    {user:'ASWA CH',action:'Approved policy POL-019',time:'1d ago'},
+    {user:'Grace Okafor',action:'Reported incident INC-032 — DNS Tunnelling Detected',time:'2h ago'},
+    {user:'Daniel Mensah',action:'Rotated API key after INC-031 disclosure',time:'1d ago'},
+    {user:'Marcus Webb',action:'Updated incident INC-005 response actions',time:'2d ago'},
+    {user:'Priya Nair',action:'Completed GDPR Art.32 evidence upload',time:'3d ago'},
+    {user:'Jonas Lindqvist',action:'Deployed CSPM guardrail blocking public bucket ACLs',time:'3d ago'},
+    {user:'ASWA CH',action:'Created audit AUD-019 — Internal ISMS Audit 2027',time:'4d ago'},
+    {user:'Mei Lin',action:'Opened vendor incident bridge for NovaPay',time:'5d ago'},
+    {user:'Elena Fischer',action:'Completed audit AUD-012 tabletop exercise findings',time:'6d ago'},
+    {user:'Marcus Webb',action:'Marked phishing simulation campaign complete',time:'1w ago'},
+    {user:'Kwame Boateng',action:'Enforced key-only SSH authentication on bastion hosts',time:'1w ago'},
+    {user:'Fatima Rahman',action:'Started CIS Controls v8 gap assessment',time:'1w ago'},
+    {user:'Ryan Cooper',action:'Extended ACME automation to internal services',time:'1w ago'},
+    {user:'Sara Bergman',action:'Completed security awareness campaign for Q4',time:'2w ago'},
+    {user:'Anita Desai',action:'Added DPIA for the new analytics platform',time:'2w ago'},
+    {user:'Daniel Mensah',action:'Onboarded 6 new log sources into the SIEM',time:'2w ago'},
+    {user:'Lucia Moretti',action:'Approved updated data retention schedule',time:'2w ago'},
+    {user:'Priya Nair',action:'Marked PCI DSS R10 as complete',time:'3w ago'},
+    {user:'ASWA CH',action:'Accepted residual risk for lost laptop INC-007',time:'3w ago'},
+    {user:'Tomas Silva',action:'Added 8 new risks to the register',time:'3w ago'},
+    {user:'Marcus Webb',action:'Ran quarterly access recertification',time:'4w ago'},
+    {user:'Jonas Lindqvist',action:'Completed cloud tenant isolation test',time:'4w ago'},
+    {user:'Grace Okafor',action:'Closed incident INC-020 after server rebuild',time:'5w ago'},
+    {user:'Mei Lin',action:'Reassessed tier-1 vendor CloudBase Hosting',time:'5w ago'},
+    {user:'Elena Fischer',action:'Uploaded SOC 2 readiness evidence pack',time:'6w ago'},
+    {user:'Ibrahim Yusuf',action:'Updated helpdesk callback verification runbook',time:'6w ago'},
+    {user:'Kwame Boateng',action:'Blocked three brute-force source ranges',time:'7w ago'},
+    {user:'System',action:'Weekly risk register recalculation completed',time:'1d ago'},
+    {user:'System',action:'Scheduled backup verification completed successfully',time:'2d ago'},
+    {user:'System',action:'Compliance percentage recalculated for 7 frameworks',time:'3d ago'},
+  ];
+  const documents=[
+    {id:'DOC-0001',name:'ISO27001-Statement-of-Applicability.pdf',cls:'Confidential',src:'Manual upload',date:daysAgo(20),by:'ASWA CH',text:'Statement of Applicability excerpt — Annex A control mapping, applicability justifications and ISMS scope statement for CyberTech Solutions.'},
+    {id:'DOC-0002',name:'audit-evidence-firewall-rules.png',cls:'Internal',src:'OCR Scan',date:daysAgo(8),by:'Marcus Webb',text:'Firewall rule export evidence — rule base reviewed, unused rules removed, default-deny confirmed on all segments. Severity: Medium. Owner: Marcus Webb.'},
+    {id:'DOC-0003',name:'GDPR-Record-of-Processing.xlsx',cls:'Confidential',src:'Manual upload',date:daysAgo(60),by:'Anita Desai',text:'Record of processing activities listing 34 processing operations, lawful bases, retention periods and recipients.'},
+    {id:'DOC-0004',name:'penetration-test-report-2026.pdf',cls:'Restricted',src:'Manual upload',date:daysAgo(63),by:'Elena Fischer',text:'External penetration test report: 1 high, 3 medium findings, remediation guidance and retest plan.'},
+    {id:'DOC-0005',name:'backup-restore-evidence-nov.png',cls:'Internal',src:'OCR Scan',date:daysAgo(12),by:'Ryan Cooper',text:'Backup restore verification screenshot — 5 of 6 systems restored within the 4 hour RTO target.'},
+    {id:'DOC-0006',name:'vendor-questionnaire-novapay.docx',cls:'Confidential',src:'Manual upload',date:daysAgo(70),by:'Mei Lin',text:'Completed security questionnaire for NovaPay covering encryption, access control and incident notification.'},
+    {id:'DOC-0007',name:'access-review-q4.csv',cls:'Restricted',src:'Manual upload',date:daysAgo(16),by:'Daniel Mensah',text:'Quarterly access recertification export with 412 accounts reviewed and 9 access removals recorded.'},
+    {id:'DOC-0008',name:'phishing-simulation-results.pdf',cls:'Internal',src:'Manual upload',date:daysAgo(9),by:'Marcus Webb',text:'Quarterly phishing simulation results: 4.2 percent click rate, 68 percent reporting rate across 480 staff.'},
+    {id:'DOC-0009',name:'cloud-cspm-findings.xlsx',cls:'Confidential',src:'Manual upload',date:daysAgo(5),by:'Jonas Lindqvist',text:'CSPM findings export with 27 items, 21 auto-remediated and 6 requiring manual review.'},
+    {id:'DOC-0010',name:'incident-report-inc-020.pdf',cls:'Restricted',src:'Manual upload',date:daysAgo(15),by:'Grace Okafor',text:'Post-incident report for the web shell compromise, including root cause, containment timeline and corrective actions.'},
+    {id:'DOC-0011',name:'DPIA-analytics-platform.docx',cls:'Confidential',src:'Manual upload',date:daysAgo(26),by:'Anita Desai',text:'Data protection impact assessment for the customer analytics platform covering profiling risks and mitigations.'},
+    {id:'DOC-0012',name:'network-diagram-current.png',cls:'Confidential',src:'Manual upload',date:daysAgo(40),by:'Kwame Boateng',text:'Current network architecture diagram showing segmentation between production, staging, corporate and IoT zones.'},
+    {id:'DOC-0013',name:'business-continuity-plan.pdf',cls:'Restricted',src:'Manual upload',date:daysAgo(90),by:'Ryan Cooper',text:'Business continuity plan version 4 with recovery time objectives, call trees and alternate site procedures.'},
+    {id:'DOC-0014',name:'security-awareness-completion.csv',cls:'Internal',src:'Manual upload',date:daysAgo(33),by:'Sara Bergman',text:'Annual security awareness training completion tracker, 96 percent completion across all departments.'},
+    {id:'DOC-0015',name:'sbom-release-4-2.json',cls:'Internal',src:'Manual upload',date:daysAgo(22),by:'Ryan Cooper',text:'Software bill of materials for release 4.2 listing 318 components and their licence and vulnerability status.'},
+    {id:'DOC-0016',name:'vendor-soc2-report-cloudbase.pdf',cls:'Confidential',src:'Manual upload',date:daysAgo(45),by:'Mei Lin',text:'CloudBase Hosting SOC 2 Type II report for the audit period, covering availability and confidentiality criteria.'},
+    {id:'DOC-0017',name:'patch-compliance-dashboard.png',cls:'Internal',src:'OCR Scan',date:daysAgo(11),by:'Priya Nair',text:'Patch compliance dashboard screenshot showing 98 percent critical patch compliance within the 48 hour SLA.'},
+    {id:'DOC-0018',name:'key-management-procedure.pdf',cls:'Restricted',src:'Manual upload',date:daysAgo(52),by:'Jonas Lindqvist',text:'Cryptographic key management procedure including generation, rotation, escrow and destruction responsibilities.'},
+    {id:'DOC-0019',name:'helpdesk-callback-runbook.pdf',cls:'Internal',src:'Manual upload',date:daysAgo(6),by:'Ibrahim Yusuf',text:'Helpdesk identity verification runbook covering callback procedures and VIP reset approvals.'},
+    {id:'DOC-0020',name:'risk-treatment-plan-2026.xlsx',cls:'Confidential',src:'Manual upload',date:daysAgo(58),by:'Tomas Silva',text:'Risk treatment plan tracker mapping 48 risks to owners, treatment options, target dates and residual scores.'},
+    {id:'DOC-0021',name:'pci-segmentation-scan.pdf',cls:'Restricted',src:'Manual upload',date:daysAgo(28),by:'Priya Nair',text:'PCI DSS network segmentation scan results confirming cardholder data environment isolation.'},
+    {id:'DOC-0022',name:'third-party-register.csv',cls:'Confidential',src:'Manual upload',date:daysAgo(36),by:'Mei Lin',text:'Third-party register listing 86 vendors with tiering, data categories and last assessment dates.'},
+    {id:'DOC-0023',name:'fire-drill-evidence.png',cls:'Internal',src:'OCR Scan',date:daysAgo(47),by:'Sara Bergman',text:'Fire drill attendance evidence for the head office, 214 occupants evacuated in 4 minutes 20 seconds.'},
+    {id:'DOC-0024',name:'mdm-compliance-report.pdf',cls:'Internal',src:'Manual upload',date:daysAgo(42),by:'Sara Bergman',text:'Mobile device management compliance report, 14 devices flagged for containerisation enforcement.'},
+    {id:'DOC-0025',name:'dpo-appointment-letter.pdf',cls:'Confidential',src:'Manual upload',date:daysAgo(120),by:'Lucia Moretti',text:'Formal appointment letter for the Data Protection Officer including reporting lines to the board.'},
+    {id:'DOC-0026',name:'vulnerability-scan-weekly.pdf',cls:'Internal',src:'Manual upload',date:daysAgo(2),by:'Daniel Mensah',text:'Weekly authenticated vulnerability scan summary: 12 critical, 48 high, 132 medium findings across 640 hosts.'},
+  ];
+  return {users,risks,policies,frameworks,audits,incidents,notifs,logs,prefs:{},documents,loginHistory:[]};
+}
+function dbLoad(){
+  try{
+    const raw=localStorage.getItem(DB_KEY);
+    if(!raw){DB=seed();}
+    else{
+      const dec=xorDec(raw);
+      if(dec){DB=JSON.parse(dec);}
+      else{DB=JSON.parse(raw);} /* migrate older plaintext databases */
+    }
+  }catch(e){DB=seed();}
+  DB.documents=DB.documents||[]; DB.loginHistory=DB.loginHistory||[];
+  dbSave();
+}
+function dbSave(){ try{localStorage.setItem(DB_KEY,xorEnc(JSON.stringify(DB)));}catch(e){} }
+
+/* ═════════ SESSION & RBAC ═════════ */
+let session=null;
+function loadSession(){ try{session=JSON.parse(localStorage.getItem(SESS_KEY));}catch(e){session=null;} }
+function saveSession(){ session?localStorage.setItem(SESS_KEY,JSON.stringify(session)):localStorage.removeItem(SESS_KEY); }
+function me(){ return DB.users.find(u=>u.id===(session&&session.uid)); }
+function requireRole(roles){ if(roles.includes(me().role))return true; toast('Your role ('+me().role+') does not have permission for this action.','error'); return false; }
+const canEdit=()=>me()&&me().role!=='Viewer';
+function logAction(action){ DB.logs.unshift({user:me()?me().name:'System',action,time:new Date().toLocaleString()}); DB.logs=DB.logs.slice(0,80); }
+
+/* ═════════ NOTIFICATIONS ═════════ */
+const NICON={risk:'alert-triangle',incident:'siren',audit:'clipboard-check',policy:'file-check',compliance:'check-square'};
+function notify(kind,title,body){ DB.notifs.unshift({id:uid('n'),icon:NICON[kind]||'bell',title,body,time:'just now',read:false}); DB.notifs=DB.notifs.slice(0,30); dbSave(); renderNotifBadge(); }
+function renderNotifBadge(){ const b=$('#notif-count'); if(!b)return; const n=DB.notifs.filter(x=>!x.read).length; b.textContent=n; b.classList.toggle('hidden',n===0); }
+function toggleNotifDrop(){ const d=$('#notif-drop'); if(!d)return; d.classList.toggle('hidden'); if(!d.classList.contains('hidden')){ d.innerHTML=DB.notifs.map(n=>`
+  <div class="px-4 py-3 flex gap-3 border-b last:border-0 ${n.read?'opacity-55':''}" style="border-color:var(--border)">
+    <i data-lucide="${n.icon}" class="w-4 h-4 text-cy shrink-0 mt-.5"></i>
+    <div class="min-w-0"><b class="text-sm block">${esc(n.title)}</b><p class="text-xs muted">${esc(n.body)}</p><p class="text-[10px] muted mt-1">${esc(n.time)}</p></div></div>`).join('')||'<p class="p-4 text-sm muted">No notifications.</p>';
+  d.innerHTML+=`<button class="w-full text-center text-xs py-2.5 text-cy font-semibold hover:bg-cyan-500/10" onclick="markAllRead()">Mark all as read</button>`;
+  lucide.createIcons(); } }
+function markAllRead(){ DB.notifs.forEach(n=>n.read=true); dbSave(); renderNotifBadge(); toggleNotifDrop(); toggleNotifDrop(); }
+document.addEventListener('click',e=>{ const d=$('#notif-drop'); if(d&&!d.classList.contains('hidden')&&!e.target.closest('#notif-wrap')) d.classList.add('hidden'); });
+
+/* ═════════ TOASTS & MODALS ═════════ */
+function toast(msg,type){ const t=document.createElement('div'); t.className='toast'+(type==='error'?' err':type==='info'?' info':''); t.innerHTML=`<i data-lucide="${type==='error'?'alert-circle':type==='info'?'info':'check-circle'}" class="w-4 h-4 shrink-0 ${type==='error'?'text-red-400':type==='info'?'text-viol':'text-cy'}"></i><span>${esc(msg)}</span>`; $('#toasts').appendChild(t); lucide.createIcons(); setTimeout(()=>{t.style.opacity='0';t.style.transition='opacity .3s';setTimeout(()=>t.remove(),320);},3200); }
+function openModal(title,body,onOk,okLabel){
+  $('#modal-root').innerHTML=`<div class="fixed inset-0 z-[95] modal-bg flex items-center justify-center p-4" onclick="if(event.target===this)closeModal()">
+    <div class="modal-card w-full max-w-lg p-6">
+      <div class="flex items-center justify-between mb-4"><h3 class="text-lg font-extrabold">${title}</h3>
+        <button class="btn btn-ghost btn-sm" onclick="closeModal()"><i data-lucide="x" class="w-4 h-4"></i></button></div>
+      <div class="space-y-4">${body}</div>
+      <div class="flex justify-end gap-2 mt-6">
+        <button class="btn btn-ghost" onclick="closeModal()">Cancel</button>
+        <button class="btn ${okLabel==='Delete'?'btn-danger':'btn-pri'}" id="modal-ok">${okLabel||'Save'}</button></div>
+    </div></div>`;
+  $('#modal-ok').onclick=()=>{ if(onOk&&onOk()===false)return; closeModal(); };
+  lucide.createIcons();
+}
+function closeModal(){ $('#modal-root').innerHTML=''; }
+function confirmDlg(msg,onOk){ openModal('Please confirm',`<p class="text-sm">${esc(msg)}</p>`,onOk,'Delete'); }
+
+/* ═════════ AUTH (login / register / forgot) ═════════ */
+function renderLogin(){
+  $('#app').innerHTML=`
+  <div class="min-h-screen flex items-center justify-center p-4 relative overflow-hidden" style="background:radial-gradient(1200px 600px at 80% -10%,rgba(139,92,246,.18),transparent),radial-gradient(900px 500px at -10% 110%,rgba(34,211,238,.14),transparent),var(--bg)">
+    <div class="glow w-96 h-96 bg-violet-600" style="top:-6rem;right:-4rem"></div>
+    <div class="glow w-96 h-96 bg-cyan-500" style="bottom:-8rem;left:-6rem"></div>
+    <div class="w-full max-w-5xl grid md:grid-cols-2 card overflow-hidden fade-in relative z-10">
+      <div class="p-10 hidden md:flex flex-col justify-between" style="background:linear-gradient(160deg,#0c1638,#0a0f28)">
+        <div class="flex items-center gap-3">
+          <div class="w-11 h-11 rounded-xl flex items-center justify-center" style="background:linear-gradient(135deg,#06b6d4,#3b82f6)"><i data-lucide="shield-check" class="w-6 h-6 text-white"></i></div>
+          <div><b class="text-xl tracking-tight">GRC SHIELD</b><p class="text-[11px] text-cy font-semibold tracking-widest">CYBERTECH SOLUTIONS</p></div></div>
+        <div>
+          <h1 class="text-3xl font-black leading-tight mb-4">Governance, Risk & Compliance — unified.</h1>
+          <p class="text-sm" style="color:#8ea0c9">Manage security policies, assess risks on a 5×5 matrix, track ISO 27001 · GDPR · PCI DSS compliance, run audits and respond to incidents — all in one command center.</p>
+          <div class="grid grid-cols-3 gap-3 mt-8">
+            ${[['12','Risks'],['8','Policies'],['3','Frameworks']].map(([n,l])=>`<div class="p-3 rounded-xl border" style="border-color:#1d2b58;background:rgba(34,211,238,.05)"><p class="text-2xl font-black text-cy">${n}</p><p class="text-[11px]" style="color:#8ea0c9">${l}</p></div>`).join('')}
+          </div></div>
+        <p class="text-[10px]" style="color:#5b6b93">Academic demonstration platform · Fictional data · Encrypted storage, login lockout, session timeout & audit trail enabled · Not an official certification or legal compliance determination.</p>
+      </div>
+      <div class="p-8 md:p-10">
+        <div class="md:hidden flex items-center gap-3 mb-6"><div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background:linear-gradient(135deg,#06b6d4,#3b82f6)"><i data-lucide="shield-check" class="w-5 h-5 text-white"></i></div><b>GRC SHIELD</b></div>
+        <div class="flex gap-2 mb-6 p-1 rounded-xl" style="background:var(--card2)">
+          ${['login','register','forgot'].map(m=>`<button class="flex-1 py-2 rounded-lg text-sm font-semibold transition" id="tab-${m}" onclick="authTab('${m}')">${m==='login'?'Sign In':m==='register'?'Register':'Forgot'}</button>`).join('')}
+        </div>
+        <div id="auth-form"></div>
+        <div class="mt-6 p-4 rounded-xl border" style="border-color:var(--border);background:var(--card2)">
+          <p class="text-[11px] font-bold uppercase tracking-widest muted mb-2">Demo accounts</p>
+          ${[['Admin','admin@cybertech.io','Admin@123'],['Security Officer','officer@cybertech.io','Officer@123'],['Viewer','viewer@cybertech.io','Viewer@123']].map(([r,e,p])=>`
+          <button class="w-full flex items-center justify-between text-left px-3 py-2 rounded-lg hover:bg-cyan-500/10 transition mb-1" onclick="fillDemo('${e}','${p}')">
+            <span class="text-xs"><b>${r}</b> <span class="muted">${e}</span></span><span class="text-[10px] mono muted">${p}</span></button>`).join('')}
+        </div>
+      </div>
+    </div></div>`;
+  authTab('login');
+}
+function authTab(m){
+  ['login','register','forgot'].forEach(x=>{ const b=$('#tab-'+x); if(!b)return; const on=x===m; b.style.background=on?'linear-gradient(135deg,#06b6d4,#3b82f6)':'transparent'; b.style.color=on?'#fff':'var(--muted)'; });
+  const f=$('#auth-form');
+  if(m==='login') f.innerHTML=`
+    <h2 class="text-xl font-extrabold mb-1">Welcome back</h2><p class="text-sm muted mb-5">Sign in to the CyberTech GRC command center.</p>
+    <div class="space-y-4">
+      <div><label>Email</label><input id="li-email" type="email" placeholder="you@cybertech.io" autocomplete="username"></div>
+      <div><label>Password</label><input id="li-pass" type="password" placeholder="••••••••" autocomplete="current-password"></div>
+      <button class="btn btn-pri w-full justify-center" id="li-btn" onclick="doLogin()"><i data-lucide="log-in" class="w-4 h-4"></i><span>Sign In</span></button></div>`;
+  else if(m==='register') f.innerHTML=`
+    <h2 class="text-xl font-extrabold mb-1">Create account</h2><p class="text-sm muted mb-5">New accounts are registered with Viewer (read-only) access — an Admin can upgrade your role.</p>
+    <div class="space-y-4">
+      <div><label>Full name *</label><input id="rg-name" placeholder="Jordan Blake"></div>
+      <div><label>Email *</label><input id="rg-email" type="email" placeholder="you@company.com"></div>
+      <div><label>Password (min 8 chars) *</label><input id="rg-pass" type="password" oninput="rgStrength()"></div>
+      <div id="rg-strength" class="hidden -mt-2"><div class="progress-track !h-1.5"><div class="progress-fill" id="rg-bar" style="width:0%"></div></div><p class="text-[11px] mt-1" id="rg-lbl"></p></div>
+      <div><label>Confirm password *</label><input id="rg-pass2" type="password"></div>
+      <button class="btn btn-pri w-full justify-center" onclick="doRegister()"><i data-lucide="user-plus" class="w-4 h-4"></i><span>Create Account</span></button></div>`;
+  else f.innerHTML=`
+    <h2 class="text-xl font-extrabold mb-1">Reset password</h2><p class="text-sm muted mb-5">Enter your account email. In this demo, a reset link is simulated instantly.</p>
+    <div class="space-y-4">
+      <div><label>Email</label><input id="fp-email" type="email"></div>
+      <button class="btn btn-pri w-full justify-center" onclick="doForgot()"><i data-lucide="mail" class="w-4 h-4"></i><span>Send Reset Link</span></button></div>`;
+  lucide.createIcons();
+}
+function fillDemo(e,p){ authTab('login'); $('#li-email').value=e; $('#li-pass').value=p; toast('Demo credentials filled — press Sign In.','info'); }
+function doLogin(){
+  const email=$('#li-email').value.trim().toLowerCase(), pass=$('#li-pass').value;
+  const left=secLocked(email);
+  if(left>0){ toast('Account temporarily locked. Try again in '+left+'s.','error'); return; }
+  const u=DB.users.find(x=>x.email.toLowerCase()===email);
+  if(!u){ recordLogin(email,false); dbSave(); toast('No account found for that email.','error'); return; }
+  if(u.pass!==hashPassword(pass)){
+    recordLogin(email,false); dbSave();
+    const f=secFail(email);
+    if(f>=5){ secLock(email,30); toast('Too many failed attempts — account locked for 30 seconds.','error'); }
+    else toast('Incorrect password. '+(5-f)+' attempt(s) remaining.','error');
+    return;
+  }
+  if(!u.active){ recordLogin(email,false); dbSave(); toast('This account has been deactivated. Contact an Admin.','error'); return; }
+  secReset(email); recordLogin(email,true); dbSave();
+  const btn=$('#li-btn'); btn.disabled=true;
+  btn.innerHTML='<i data-lucide="loader-2" class="w-4 h-4 animate-spin"></i><span>Authenticating…</span>'; lucide.createIcons();
+  setTimeout(()=>{ session={uid:u.id,started:Date.now()}; saveSession(); logAction('Signed in'); dbSave(); toast('Welcome back, '+u.name.split(' ')[0]+'.'); renderApp(); go('dashboard'); },500);
+}
+function rgStrength(){
+  const p=$('#rg-pass').value, box=$('#rg-strength'); if(!box)return;
+  box.classList.toggle('hidden',!p);
+  const s=pwScore(p), colors=['#f87171','#f87171','#fb923c','#fbbf24','#34d399','#22d3ee'];
+  const bar=$('#rg-bar'); if(bar){bar.style.width=(s*20)+'%';bar.style.background=colors[s];}
+  const lbl=$('#rg-lbl'); if(lbl){lbl.textContent=pwLabel(s)+' password';lbl.style.color=colors[s];}
+}
+function doRegister(){
+  const name=$('#rg-name').value.trim(), email=$('#rg-email').value.trim().toLowerCase(), p1=$('#rg-pass').value, p2=$('#rg-pass2').value;
+  if(!name||!email){ toast('Name and email are required.','error'); return; }
+  if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){ toast('Enter a valid email address.','error'); return; }
+  if(p1.length<8){ toast('Password must be at least 8 characters.','error'); return; }
+  if(pwScore(p1)<3){ toast('Password too weak — use 12+ chars with mixed case, numbers or symbols.','error'); return; }
+  if(p1!==p2){ toast('Passwords do not match.','error'); return; }
+  if(DB.users.find(x=>x.email.toLowerCase()===email)){ toast('An account with this email already exists.','error'); return; }
+  DB.users.push({id:uid('u'),name,email,pass:hashPassword(p1),title:'Viewer',role:'Viewer',active:true,created:today()});
+  logAction('Registered new account '+email); dbSave(); toast('Account created — please sign in.','info'); authTab('login'); $('#li-email').value=email;
+}
+function doForgot(){
+  const email=$('#fp-email').value.trim().toLowerCase();
+  if(!DB.users.find(x=>x.email.toLowerCase()===email)){ toast('No account found for that email.','error'); return; }
+  toast('Password reset link sent to '+email+' (simulated in demo).','info');
+}
+function logout(){ logAction('Signed out'); dbSave(); session=null; saveSession(); renderLogin(); toast('Signed out.','info'); }
+
+/* ═════════ APP SHELL & ROUTER ═════════ */
+const NAV=[
+  ['dashboard','layout-dashboard','Dashboard'],
+  ['governance','scroll-text','Governance'],
+  ['risks','alert-triangle','Risk Management'],
+  ['compliance','check-square','Compliance'],
+  ['audits','clipboard-check','Audits'],
+  ['incidents','siren','Incidents'],
+  ['reports','bar-chart-3','Reports'],
+  ['users','users','User Management'],
+  ['docs','scan-line','Doc Scanner'],
+  ['settings','settings','Settings'],
+];
+const BNAV_ITEMS=[['dashboard','layout-dashboard','Home'],['risks','alert-triangle','Risks'],['docs','scan-line','Scan'],['incidents','siren','Alerts'],['menu','menu','Menu']];
+function renderApp(){
+  const u=me(); if(!u){ renderLogin(); return; }
+  const bnHTML=BNAV_ITEMS.map(([v,ic,l])=>'<button data-bn="'+v+'" class="flex flex-col items-center gap-0.5 py-2 px-3 text-[10px] font-semibold" onclick="'+(v==='menu'?'toggleSidebar()':"go('"+v+"')")+'"><i data-lucide="'+ic+'" class="w-5 h-5"></i>'+l+'</button>').join('');
+  $('#app').innerHTML=`
+  <div class="min-h-screen lg:flex">
+    <aside class="sidebar fixed lg:sticky top-0 z-40 h-screen w-64 p-4 flex flex-col gap-1 transition-transform -translate-x-full lg:translate-x-0" id="sidebar">
+      <div class="flex items-center gap-3 px-2 py-3 mb-2">
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center shrink-0" style="background:linear-gradient(135deg,#06b6d4,#3b82f6)"><i data-lucide="shield-check" class="w-5 h-5 text-white"></i></div>
+        <div><b class="tracking-tight">GRC SHIELD</b><p class="text-[10px] text-cy font-bold tracking-widest">CYBERTECH SOLUTIONS</p></div>
+        <button class="ml-auto lg:hidden btn btn-ghost btn-sm" onclick="toggleSidebar()"><i data-lucide="x" class="w-4 h-4"></i></button></div>
+      <nav class="flex-1 space-y-1 overflow-y-auto pr-1">
+        ${NAV.filter(([v])=>v!=='users'||u.role==='Admin').map(([v,ic,l])=>`
+          <div class="nav-item" data-nav="${v}" onclick="go('${v}')"><i data-lucide="${ic}" class="w-4 h-4 shrink-0"></i>${l}
+          ${v==='incidents'?`<span class="ml-auto badge bg-red-500/10 text-red-400 border border-red-500/30" id="nav-inc-badge"></span>`:''}</div>`).join('')}
+      </nav>
+      <div class="p-3 rounded-xl border mt-2" style="border-color:var(--border);background:var(--card2)">
+        <div class="flex items-center gap-2.5">
+          <div class="w-9 h-9 rounded-full bg-gradient-to-br from-violet-500 to-cyan-500 flex items-center justify-center text-white text-xs font-bold shrink-0" id="sb-avatar">${u.name.split(' ').map(x=>x[0]).join('').slice(0,2).toUpperCase()}</div>
+          <div class="min-w-0"><b class="text-sm block truncate" id="sb-user-name">${esc(u.name)}</b><p class="text-[10px] muted truncate">${u.role}</p></div></div></div>
+    </aside>
+    <div class="flex-1 min-w-0 flex flex-col">
+      <header id="topbar" class="sticky top-0 z-30 flex items-center gap-3 px-4 lg:px-8 py-3.5 border-b" style="background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(10px);border-color:var(--border)">
+        <button class="lg:hidden btn btn-ghost btn-sm" onclick="toggleSidebar()"><i data-lucide="menu" class="w-4 h-4"></i></button>
+        <div class="relative flex-1 max-w-md">
+          <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 muted pointer-events-none"></i>
+          <input id="global-search" class="!pl-9" placeholder="Search risks, policies, incidents, audits…" oninput="globalSearch(this.value)">
+        </div>
+        <div class="ml-auto flex items-center gap-2">
+          <button class="btn btn-ghost btn-sm" onclick="toggleTheme()" title="Toggle theme"><i data-lucide="sun-moon" class="w-4 h-4"></i></button>
+          <div id="notif-wrap" class="relative">
+            <button class="btn btn-ghost btn-sm relative" onclick="toggleNotifDrop()"><i data-lucide="bell" class="w-4 h-4"></i>
+              <span id="notif-count" class="hidden absolute -top-1.5 -right-1.5 min-w-[18px] h-[18px] px-1 rounded-full bg-red-500 text-white text-[10px] font-bold flex items-center justify-center">0</span></button>
+            <div id="notif-drop" class="hidden absolute right-0 mt-2 w-80 max-w-[88vw] card overflow-hidden max-h-[26rem] overflow-y-auto"></div>
+          </div>
+          <div class="hidden sm:flex items-center gap-2 pl-2">
+            <span class="text-sm font-semibold" id="hdr-user">${esc(u.name)}</span>
+            <span class="badge ${u.role==='Admin'?'bg-red-500/10 text-red-400 border border-red-500/30':u.role==='Security Officer'?'bg-violet-500/10 text-viol border border-violet-500/30':'bg-slate-500/10 text-slate-400 border border-slate-500/30'}">${u.role}</span></div>
+        </div>
+      </header>
+      <nav id="bottomnav" class="lg:hidden fixed bottom-0 inset-x-0 z-40 border-t flex justify-around" style="background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(14px);border-color:var(--border);padding-bottom:env(safe-area-inset-bottom)">${bnHTML}</nav>
+      <main id="view" class="flex-1 p-4 lg:p-8 fade-in"></main>
+      <footer class="px-8 pb-6 text-[10px] muted">© 2026 CyberTech Solutions — GRC SHIELD academic demonstration. All data is fictional; assessments are demonstrations, not certifications or legal determinations.</footer>
+    </div></div>`;
+  lucide.createIcons(); renderNotifBadge(); updateIncBadge(); startSessionWatch();
+}
+function toggleSidebar(){ $('#sidebar').classList.toggle('-translate-x-full'); }
+function updateIncBadge(){ const b=$('#nav-inc-badge'); if(b) b.textContent=DB.incidents.filter(i=>i.status!=='Resolved').length||''; }
+function go(view){
+  const u=me(); if(!u)return;
+  if(view==='users'&&u.role!=='Admin'){ toast('Admin access required.','error'); return; }
+  document.querySelectorAll('[data-nav]').forEach(n=>n.classList.toggle('active',n.dataset.nav===view));
+  $('#sidebar').classList.add('-translate-x-full');
+  document.querySelectorAll('#bottomnav [data-bn]').forEach(n=>n.classList.toggle('active',n.dataset.bn===view));
+  ({dashboard:renderDashboard,governance:renderGovernance,risks:renderRisks,compliance:renderCompliance,audits:renderAudits,incidents:renderIncidents,docs:renderDocs,reports:renderReports,users:renderUsers,settings:renderSettings}[view]||renderDashboard)();
+  lucide.createIcons();
+}
+/* ═════════ THEME ═════════ */
+function applyTheme(t){ document.documentElement.classList.toggle('light',t==='light'); document.documentElement.classList.toggle('dark',t!=='light'); localStorage.setItem('grcshield_theme',t); }
+function toggleTheme(){ applyTheme(document.documentElement.classList.contains('dark')?'light':'dark'); const el=$('#sf-theme'); if(el)el.textContent=document.documentElement.classList.contains('dark')?'Dark':'Light'; toast('Theme: '+(document.documentElement.classList.contains('dark')?'dark':'light')+' navy.','info'); }
+
+/* ═════════ CHART HELPERS ═════════ */
+const CH={};
+function mkChart(id,cfg){ if(CH[id])CH[id].destroy(); const el=$('#'+id); if(!el)return; Chart.defaults.color=getComputedStyle(document.body).color; Chart.defaults.borderColor='rgba(148,163,184,.15)'; CH[id]=new Chart(el.getContext('2d'),cfg); }
+function baseOpts(){ return {plugins:{legend:{labels:{boxWidth:12,font:{size:11}}}},maintainAspectRatio:false}; }
+
+/* ═════════ DASHBOARD ═════════ */
+function renderDashboard(){
+  const risks=DB.risks, crit=risks.filter(r=>r.level==='Critical').length;
+  const compAvg=Math.round(DB.frameworks.reduce((a,f)=>a+compPctOf(f),0)/DB.frameworks.length);
+  const activeInc=DB.incidents.filter(i=>i.status!=='Resolved').length;
+  const pendingAud=DB.audits.filter(a=>a.status!=='Completed').length;
+  const resolved=risks.filter(r=>r.status==='Resolved').length;
+  const stats=[
+    ['Total Identified Risks',risks.length,'alert-triangle','#22d3ee','risks'],
+    ['Critical Risks',crit,'shield-alert','#f87171','risks'],
+    ['Compliance Percentage',compAvg+'%','check-circle-2','#34d399','compliance'],
+    ['Active Incidents',activeInc,'siren','#fb923c','incidents'],
+    ['Security Policies',DB.policies.length,'scroll-text','#a78bfa','governance'],
+    ['Pending Audits',pendingAud,'clipboard-list','#fbbf24','audits'],
+    ['Resolved Risks',resolved,'check-check','#34d399','risks'],
+  ];
+  $('#view').innerHTML=`
+  <div class="flex flex-wrap items-center justify-between gap-3 mb-6">
+    <div><h1 class="text-2xl font-extrabold">Security Command Center</h1><p class="muted text-sm">Live posture across ${esc('CyberTech Solutions')} — updated automatically from database records.</p></div>
+    <span class="badge bg-cyan-500/10 text-cy border border-cyan-500/30"><span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse mr-1.5"></span>Live · ${new Date().toLocaleDateString('en-GB',{day:'2-digit',month:'long',year:'numeric'})}</span></div>
+  <div class="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-7 gap-3 mb-5">
+    ${stats.map(([l,v,ic,c,vw])=>`<div class="card stat-card p-4 cursor-pointer" onclick="go('${vw}')">
+      <div class="flex items-center justify-between mb-2"><i data-lucide="${ic}" class="w-4 h-4" style="color:${c}"></i></div>
+      <p class="text-2xl font-black">${v}</p><p class="text-[11px] muted mt-1 leading-tight">${l}</p></div>`).join('')}
+  </div>
+  <div class="grid lg:grid-cols-2 gap-4 mb-5">
+    <div class="card p-5"><h3 class="font-bold mb-1 flex items-center gap-2"><i data-lucide="pie-chart" class="w-4 h-4 text-cy"></i>Risk Distribution</h3><p class="text-xs muted mb-3">By category</p><div class="h-56"><canvas id="ch-risk-cat"></canvas></div></div>
+    <div class="card p-5"><h3 class="font-bold mb-1 flex items-center gap-2"><i data-lucide="bar-chart-3" class="w-4 h-4 text-viol"></i>Risk Severity</h3><p class="text-xs muted mb-3">Count per severity level</p><div class="h-56"><canvas id="ch-risk-sev"></canvas></div></div>
+    <div class="card p-5"><h3 class="font-bold mb-1 flex items-center gap-2"><i data-lucide="line-chart" class="w-4 h-4 text-cy"></i>Incident Trends</h3><p class="text-xs muted mb-3">Reported vs resolved · last 6 months</p><div class="h-56"><canvas id="ch-inc-trend"></canvas></div></div>
+    <div class="card p-5"><h3 class="font-bold mb-1 flex items-center gap-2"><i data-lucide="gauge" class="w-4 h-4 text-viol"></i>Compliance Status</h3><p class="text-xs muted mb-3">Framework completion %</p><div class="h-56"><canvas id="ch-comp"></canvas></div></div>
+  </div>
+  <div class="grid lg:grid-cols-3 gap-4">
+    <div class="card p-5 lg:col-span-2"><div class="flex items-center justify-between mb-4"><h3 class="font-bold flex items-center gap-2"><i data-lucide="history" class="w-4 h-4 text-cy"></i>Recent Activities</h3>
+      <button class="btn btn-ghost btn-sm" onclick="go('users')">View logs</button></div>
+      <div class="space-y-3">${DB.logs.slice(0,7).map(l=>`<div class="flex gap-3 items-start">
+        <div class="w-7 h-7 rounded-lg bg-cyan-500/10 text-cy flex items-center justify-center shrink-0"><i data-lucide="activity" class="w-3.5 h-3.5"></i></div>
+        <div class="min-w-0"><p class="text-sm">${esc(l.action)}</p><p class="text-[11px] muted">${esc(l.user)} · ${esc(l.time)}</p></div></div>`).join('')}</div></div>
+    <div class="card p-5"><div class="flex items-center justify-between mb-4"><h3 class="font-bold flex items-center gap-2"><i data-lucide="bell" class="w-4 h-4 text-amber-400"></i>Notifications</h3>
+      <button class="btn btn-ghost btn-sm" onclick="markAllReadFromDash()">Mark read</button></div>
+      <div class="space-y-3">${DB.notifs.slice(0,6).map(n=>`<div class="flex gap-3 items-start ${n.read?'opacity-55':''}">
+        <div class="w-7 h-7 rounded-lg bg-amber-500/10 text-amber-400 flex items-center justify-center shrink-0"><i data-lucide="${n.icon}" class="w-3.5 h-3.5"></i></div>
+        <div class="min-w-0"><p class="text-sm font-semibold">${esc(n.title)}</p><p class="text-xs muted">${esc(n.body)}</p><p class="text-[10px] muted mt-.5">${esc(n.time)}</p></div></div>`).join('')}</div></div>
+  </div>`;
+  /* charts from live DB */
+  const cats={}; risks.forEach(r=>cats[r.cat]=(cats[r.cat]||0)+1);
+  mkChart('ch-risk-cat',{type:'doughnut',data:{labels:Object.keys(cats),datasets:[{data:Object.values(cats),backgroundColor:['#22d3ee','#a78bfa','#fbbf24','#fb923c','#34d399','#f87171'],borderWidth:0}]},options:{...baseOpts(),cutout:'62%'}});
+  const lvls=['Low','Medium','High','Critical'];
+  mkChart('ch-risk-sev',{type:'bar',data:{labels:lvls,datasets:[{data:lvls.map(l=>risks.filter(r=>r.level===l).length),backgroundColor:lvls.map(l=>LEVEL_COLOR[l]+'cc'),borderRadius:8}]},options:{...baseOpts(),plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{stepSize:1}}}}});
+  const mlabels=[],rep=[],res=[];
+  for(let m=5;m>=0;m--){ const d=monthsAgo(m); mlabels.push(d.toLocaleDateString('en-GB',{month:'short'}));
+    const mk=d.toISOString().slice(0,7);
+    rep.push(DB.incidents.filter(i=>(i.date||'').slice(0,7)===mk).length);
+    res.push(DB.incidents.filter(i=>(i.resolvedDate||'').slice(0,7)===mk||i.status==='Resolved'&&(i.date||'').slice(0,7)===mk).length); }
+  mkChart('ch-inc-trend',{type:'line',data:{labels:mlabels,datasets:[
+    {label:'Reported',data:rep,borderColor:'#f87171',backgroundColor:'rgba(248,113,113,.12)',fill:true,tension:.4,pointRadius:3},
+    {label:'Resolved',data:res,borderColor:'#34d399',backgroundColor:'rgba(52,211,153,.10)',fill:true,tension:.4,pointRadius:3}]},options:baseOpts()});
+  mkChart('ch-comp',{type:'bar',data:{labels:DB.frameworks.map(f=>f.name.split(' ')[0]),datasets:[{data:DB.frameworks.map(compPctOf),backgroundColor:DB.frameworks.map(f=>{const p=compPctOf(f);return COMP_COLOR[compStatus(p)]+'cc';}),borderRadius:8}]},
+    options:{...baseOpts(),plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,max:100}}}});
+  lucide.createIcons();
+}
+function markAllReadFromDash(){ DB.notifs.forEach(n=>n.read=true); dbSave(); renderNotifBadge(); renderDashboard(); }
+
+/* ═════════ GOVERNANCE (policy management) ═════════ */
+function renderGovernance(){
+  const mine=p=>p;
+  $('#view').innerHTML=`<div class="flex flex-wrap items-center justify-between gap-3 mb-6">
+    <div><h1 class="text-2xl font-extrabold">Governance · Policy Management</h1><p class="muted text-sm">Security policy library with full approval workflow — Draft → Pending Approval → Approved.</p></div>
+    ${canEdit()?`<button class="btn btn-pri" onclick="policyForm()"><i data-lucide="plus" class="w-4 h-4"></i>New Policy</button>`:''}</div>
+  <div class="grid grid-cols-3 gap-3 mb-5">
+    ${['Approved','Pending Approval','Draft'].map(s=>`<div class="card stat-card p-4"><p class="text-[11px] muted uppercase tracking-wide">${s}</p><p class="text-2xl font-black mt-1">${DB.policies.filter(p=>p.status===s).length}</p></div>`).join('')}
+  </div>
+  <div class="card overflow-hidden"><div class="overflow-x-auto"><table class="tbl w-full min-w-[780px]">
+    <thead><tr><th>ID</th><th>Policy</th><th>Owner</th><th>Created</th><th>Updated</th><th>Status</th><th class="text-right">Actions</th></tr></thead><tbody>
+    ${DB.policies.map(p=>`<tr>
+      <td class="mono text-xs">${p.id}</td>
+      <td><b class="text-sm">${esc(p.name)}</b><p class="text-[11px] muted max-w-[26rem] truncate">${esc(p.desc)}</p></td>
+      <td class="text-xs">${esc(p.owner)}</td>
+      <td class="text-xs">${fmtD(p.created)}</td>
+      <td class="text-xs">${fmtD(p.updated)}</td>
+      <td><span class="badge" style="background:${p.status==='Approved'?'rgba(52,211,153,.12)':p.status==='Pending Approval'?'rgba(251,191,36,.12)':'rgba(148,163,184,.12)'};color:${p.status==='Approved'?'#34d399':p.status==='Pending Approval'?'#fbbf24':'#94a3b8'};border:1px solid ${p.status==='Approved'?'rgba(52,211,153,.35)':p.status==='Pending Approval'?'rgba(251,191,36,.35)':'rgba(148,163,184,.35)'}">${p.status}</span></td>
+      <td class="text-right whitespace-nowrap">
+        <button class="btn btn-ghost btn-sm" title="View" onclick="policyView('${p.id}')"><i data-lucide="eye" class="w-3.5 h-3.5"></i></button>
+        ${canEdit()?`<button class="btn btn-ghost btn-sm" title="Edit" onclick="policyForm('${p.id}')"><i data-lucide="pencil" class="w-3.5 h-3.5"></i></button>
+        ${p.status==='Draft'?`<button class="btn btn-ghost btn-sm !text-amber-400" title="Submit for approval" onclick="policySubmit('${p.id}')"><i data-lucide="send" class="w-3.5 h-3.5"></i></button>`:''}
+        ${p.status==='Pending Approval'?`<button class="btn btn-ghost btn-sm !text-emerald-400" title="Approve" onclick="policyApprove('${p.id}')"><i data-lucide="check" class="w-3.5 h-3.5"></i></button>`:''}
+        <button class="btn btn-danger btn-sm" title="Delete" onclick="policyDel('${p.id}')"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i></button>`:'<span class="text-[10px] muted">read-only</span>'}
+      </td></tr>`).join('')}</tbody></table></div></div>`;
+  lucide.createIcons();
+}
+function policyView(id){ const p=DB.policies.find(x=>x.id===id); if(!p)return;
+  openModal('Policy · '+p.id,`<div class="p-4 rounded-xl border" style="border-color:var(--border);background:var(--card2)">
+    <h4 class="font-extrabold mb-2">${esc(p.name)}</h4><p class="text-sm muted mb-3">${esc(p.desc)}</p>
+    <div class="grid grid-cols-2 gap-2 text-xs">
+      <p><span class="muted">Owner:</span> <b>${esc(p.owner)}</b></p><p><span class="muted">Status:</span> <b>${p.status}</b></p>
+      <p><span class="muted">Created:</span> <b>${fmtD(p.created)}</b></p><p><span class="muted">Updated:</span> <b>${fmtD(p.updated)}</b></p></div></div>`,null,'Close'); }
+function policyForm(id){
+  if(!canEdit()){ toast('Viewers cannot edit policies.','error'); return; }
+  const p=id?DB.policies.find(x=>x.id===id):null;
+  openModal(p?'Edit Policy':'New Policy',`
+    <div><label>Policy name *</label><input id="pf-name" value="${p?esc(p.name):''}" placeholder="e.g. Password Security Policy"></div>
+    <div><label>Description *</label><textarea id="pf-desc" rows="3">${p?esc(p.desc):''}</textarea></div>
+    <div><label>Policy owner *</label><input id="pf-owner" value="${p?esc(p.owner):esc(me().name)}"></div>`,()=>{
+    const name=$('#pf-name').value.trim(), desc=$('#pf-desc').value.trim(), owner=$('#pf-owner').value.trim();
+    if(!name||!desc||!owner){ toast('All fields are required.','error'); return false; }
+    if(p){ Object.assign(p,{name,desc,owner,updated:today()}); logAction('Edited policy '+p.id); toast('Policy updated.'); }
+    else{ DB.policies.unshift({id:uid('POL'),name,desc,owner,status:'Draft',created:today(),updated:today()}); logAction('Created policy "'+name+'"'); toast('Policy created as Draft.'); }
+    dbSave(); renderGovernance(); });
+}
+function policySubmit(id){ if(!requireRole(['Admin','Security Officer']))return; const p=DB.policies.find(x=>x.id===id); p.status='Pending Approval'; p.updated=today(); dbSave(); logAction('Submitted '+id+' for approval'); notify('policy','Policy approval requested',p.name+' ('+id+') is pending approval.'); toast('Submitted for approval.','info'); renderGovernance(); }
+function policyApprove(id){ if(!requireRole(['Admin','Security Officer']))return; const p=DB.policies.find(x=>x.id===id); p.status='Approved'; p.updated=today(); dbSave(); logAction('Approved policy '+id); notify('policy','Policy approved',p.name+' ('+id+') has been approved.'); toast('Policy approved.'); renderGovernance(); }
+function policyDel(id){ if(!requireRole(['Admin','Security Officer']))return; const p=DB.policies.find(x=>x.id===id);
+  confirmDlg('Delete policy "'+p.name+'"?',()=>{ DB.policies=DB.policies.filter(x=>x.id!==id); dbSave(); logAction('Deleted policy '+id); toast('Policy deleted.','info'); renderGovernance(); }); }
+
+/* ═════════ RISK MANAGEMENT ═════════ */
+let riskFilter={q:'',level:'',status:''};
+function renderRisks(){
+  const lvls=['Low','Medium','High','Critical'];
+  const st=['Identified','Assessing','Mitigating','Monitoring','Resolved'];
+  $('#view').innerHTML=`<div class="flex flex-wrap items-center justify-between gap-3 mb-6">
+    <div><h1 class="text-2xl font-extrabold">Risk Management</h1><p class="muted text-sm">Identify → Assess (Likelihood × Impact) → Treat → Monitor. Score & severity auto-calculated.</p></div>
+    ${canEdit()?`<button class="btn btn-pri" onclick="riskForm()"><i data-lucide="plus" class="w-4 h-4"></i>Add New Risk</button>`:''}</div>
+  <div class="grid lg:grid-cols-3 gap-4 mb-5">
+    <div class="card p-5 lg:col-span-1"><h3 class="font-bold mb-1 flex items-center gap-2"><i data-lucide="grid-3x3" class="w-4 h-4 text-cy"></i>5×5 Risk Heatmap</h3><p class="text-xs muted mb-4">Likelihood × Impact · click a cell to filter</p>
+      <div class="grid gap-1" style="grid-template-columns:auto repeat(5,1fr)">
+        <div></div>${[1,2,3,4,5].map(i=>`<div class="text-center text-[10px] muted font-bold">I${i}</div>`).join('')}
+        ${[5,4,3,2,1].map(l=>`<div class="flex items-center"><span class="text-[10px] muted font-bold pr-1">L${l}</span></div>
+          ${[1,2,3,4,5].map(i=>{const lv=riskLevel(l*i);const n=DB.risks.filter(r=>r.l===l&&r.i===i).length;
+            return `<div class="heat-cell" style="background:${LEVEL_COLOR[lv]}22;color:${LEVEL_COLOR[lv]};border-color:${LEVEL_COLOR[lv]}44" title="${n} risk(s) at L${l}×I${i} (${lv})" onclick="riskHeatFilter('${lv}')">${n||''}</div>`;}).join('')}`).join('')}
+      </div>
+      <div class="flex gap-3 mt-3 justify-center">${lvls.map(l=>`<span class="flex items-center gap-1 text-[10px] muted"><span class="w-2.5 h-2.5 rounded-sm" style="background:${LEVEL_COLOR[l]}"></span>${l}</span>`).join('')}</div></div>
+    <div class="card p-5 lg:col-span-2"><h3 class="font-bold mb-1 flex items-center gap-2"><i data-lucide="bar-chart-2" class="w-4 h-4 text-viol"></i>Risk Register</h3><p class="text-xs muted mb-4">${DB.risks.length} identified risks · ${DB.risks.filter(r=>r.status==='Resolved').length} resolved</p>
+      <div class="flex flex-wrap gap-3 mb-4 items-end">
+        <div class="flex-1 min-w-[11rem]"><label>Search</label><input id="rk-q" placeholder="Title, ID, owner…" value="${esc(riskFilter.q)}" oninput="riskFilter.q=this.value;renderRiskTable()"></div>
+        <div><label>Severity</label><select id="rk-level" onchange="riskFilter.level=this.value;renderRiskTable()">
+          <option value="">All</option>${lvls.map(l=>`<option ${riskFilter.level===l?'selected':''}>${l}</option>`).join('')}</select></div>
+        <div><label>Status</label><select id="rk-status" onchange="riskFilter.status=this.value;renderRiskTable()">
+          <option value="">All</option>${st.map(s=>`<option ${riskFilter.status===s?'selected':''}>${s}</option>`).join('')}</select></div>
+      </div>
+      <div class="overflow-x-auto max-h-[28rem] overflow-y-auto"><table class="tbl w-full min-w-[820px]">
+        <thead class="sticky top-0"><tr><th>ID</th><th>Risk</th><th>Category</th><th>L×I</th><th>Score</th><th>Severity</th><th>Owner</th><th>Status</th><th class="text-right">Actions</th></tr></thead>
+        <tbody id="risk-rows"></tbody></table></div></div></div>
+  <div class="card p-5"><h3 class="font-bold mb-3 flex items-center gap-2"><i data-lucide="target" class="w-4 h-4 text-cy"></i>Risk Treatment Pipeline</h3>
+    <div class="grid md:grid-cols-5 gap-3">${st.map(s=>{const n=DB.risks.filter(r=>r.status===s);return `<div class="p-3 rounded-xl border" style="border-color:var(--border);background:var(--card2)">
+      <p class="text-[11px] muted uppercase tracking-wide">${s}</p><p class="text-xl font-black mt-1">${n.length}</p>
+      <p class="text-[10px] muted truncate">${n.slice(0,2).map(r=>r.title).join(' · ')||'—'}</p></div>`;}).join('')}</div></div>`;
+  renderRiskTable(); lucide.createIcons();
+}
+function riskHeatFilter(lv){ riskFilter.level=riskFilter.level===lv?'':lv; renderRisks(); }
+function filteredRisks(){ const q=riskFilter.q.toLowerCase();
+  return DB.risks.filter(r=>(!q||r.title.toLowerCase().includes(q)||r.id.toLowerCase().includes(q)||r.owner.toLowerCase().includes(q))
+    &&(!riskFilter.level||r.level===riskFilter.level)&&(!riskFilter.status||r.status===riskFilter.status)); }
+function renderRiskTable(){
+  const rows=filteredRisks();
+  $('#risk-rows').innerHTML=rows.map(r=>`<tr>
+    <td class="mono text-xs">${r.id}</td>
+    <td><b class="text-sm">${esc(r.title)}</b><p class="text-[11px] muted max-w-[20rem] truncate">${esc(r.desc)}</p></td>
+    <td class="text-xs">${esc(r.cat)}</td>
+    <td class="text-xs mono">${r.l}×${r.i}</td>
+    <td class="font-black" style="color:${LEVEL_COLOR[r.level]}">${r.score}</td>
+    <td><span class="badge" style="background:${LEVEL_COLOR[r.level]}1c;color:${LEVEL_COLOR[r.level]};border:1px solid ${LEVEL_COLOR[r.level]}44">${r.level}</span></td>
+    <td class="text-xs">${esc(r.owner)}</td>
+    <td class="text-xs">${esc(r.status)}</td>
+    <td class="text-right whitespace-nowrap">
+      <button class="btn btn-ghost btn-sm" title="Details" onclick="riskView('${r.id}')"><i data-lucide="eye" class="w-3.5 h-3.5"></i></button>
+      ${canEdit()?`<button class="btn btn-ghost btn-sm" title="Edit" onclick="riskForm('${r.id}')"><i data-lucide="pencil" class="w-3.5 h-3.5"></i></button>
+      <button class="btn btn-danger btn-sm" title="Delete" onclick="riskDel('${r.id}')"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i></button>`:''}
+    </td></tr>`).join('')||'<tr><td colspan="9" class="text-center muted py-8">No risks match the current filters.</td></tr>';
+  lucide.createIcons();
+}
+function riskView(id){ const r=DB.risks.find(x=>x.id===id); if(!r)return;
+  openModal('Risk · '+r.id,`<div class="p-4 rounded-xl border" style="border-color:var(--border);background:var(--card2)">
+    <div class="flex items-center gap-2 mb-2"><h4 class="font-extrabold">${esc(r.title)}</h4><span class="badge" style="background:${LEVEL_COLOR[r.level]}1c;color:${LEVEL_COLOR[r.level]};border:1px solid ${LEVEL_COLOR[r.level]}44">${r.level} · ${r.score}</span></div>
+    <p class="text-sm muted mb-3">${esc(r.desc)}</p>
+    <div class="grid grid-cols-2 gap-2 text-xs mb-3">
+      <p><span class="muted">Category:</span> <b>${esc(r.cat)}</b></p><p><span class="muted">Owner:</span> <b>${esc(r.owner)}</b></p>
+      <p><span class="muted">Likelihood:</span> <b>${r.l}/5</b></p><p><span class="muted">Impact:</span> <b>${r.i}/5</b></p>
+      <p><span class="muted">Status:</span> <b>${esc(r.status)}</b></p><p><span class="muted">Identified:</span> <b>${fmtD(r.created)}</b></p></div>
+    <p class="text-xs"><span class="muted">Mitigation plan:</span> ${esc(r.plan)}</p></div>`,null,'Close'); }
+function riskForm(id){
+  if(!canEdit()){ toast('Viewers cannot edit risks.','error'); return; }
+  const r=id?DB.risks.find(x=>x.id===id):null;
+  const cats=[...new Set(DB.risks.map(x=>x.cat))];
+  openModal(r?'Edit Risk':'Add New Risk',`
+    <div><label>Risk title *</label><input id="rf-title" value="${r?esc(r.title):''}" placeholder="e.g. Phishing Attack"></div>
+    <div><label>Description *</label><textarea id="rf-desc" rows="2">${r?esc(r.desc):''}</textarea></div>
+    <div class="grid grid-cols-2 gap-3">
+      <div><label>Category</label><select id="rf-cat">${cats.map(c=>`<option ${r&&r.cat===c?'selected':''}>${c}</option>`).join('')}<option ${r&&!cats.includes(r.cat)?'selected':''}>Other</option></select></div>
+      <div><label>Owner *</label><input id="rf-owner" value="${r?esc(r.owner):esc(me().name)}"></div></div>
+    <div class="grid grid-cols-2 gap-3">
+      <div><label>Likelihood (1–5)</label><input id="rf-l" type="number" min="1" max="5" value="${r?r.l:3}" oninput="riskLiveScore()"></div>
+      <div><label>Impact (1–5)</label><input id="rf-i" type="number" min="1" max="5" value="${r?r.i:3}" oninput="riskLiveScore()"></div></div>
+    <div class="p-3 rounded-xl border text-sm flex items-center gap-2" style="border-color:var(--border);background:var(--card2)">
+      <span class="text-xs muted">Score = L × I →</span><b id="rf-score" class="text-lg"></b></div>
+    <div><label>Mitigation plan</label><textarea id="rf-plan" rows="2">${r?esc(r.plan):''}</textarea></div>
+    <div><label>Status</label><select id="rf-status">${['Identified','Assessing','Mitigating','Monitoring','Resolved'].map(s=>`<option ${r&&r.status===s?'selected':''}>${s}</option>`).join('')}</select></div>`,()=>{
+    const title=$('#rf-title').value.trim(), desc=$('#rf-desc').value.trim(), owner=$('#rf-owner').value.trim();
+    const l=Math.min(5,Math.max(1,parseInt($('#rf-l').value)||1)), i=Math.min(5,Math.max(1,parseInt($('#rf-i').value)||1));
+    if(!title||!desc||!owner){ toast('Title, description and owner are required.','error'); return false; }
+    const {score,level}=calcRisk(l,i);
+    if(r){ Object.assign(r,{title,desc,cat:$('#rf-cat').value,owner,l,i,score,level,plan:$('#rf-plan').value.trim(),status:$('#rf-status').value}); logAction('Edited risk '+r.id); toast('Risk updated.'); }
+    else{ DB.risks.unshift({id:uid('RSK'),title,desc,cat:$('#rf-cat').value,owner,l,i,score,level,plan:$('#rf-plan').value.trim(),status:$('#rf-status').value,created:today()}); logAction('Created risk "'+title+'"'); toast('Risk added — score '+score+' ('+level+').'); }
+    if(level==='Critical') notify('risk','Critical risk alert','"'+title+'" scored '+score+' (Critical). Immediate review recommended.');
+    dbSave(); renderRisks(); });
+  riskLiveScore();
+}
+function riskLiveScore(){ const l=parseInt($('#rf-l').value)||1,i=parseInt($('#rf-i').value)||1; const {score,level}=calcRisk(Math.min(5,Math.max(1,l)),Math.min(5,Math.max(1,i)));
+  const el=$('#rf-score'); if(el){ el.textContent=score+' · '+level; el.style.color=LEVEL_COLOR[level]; } }
+function riskDel(id){ if(!requireRole(['Admin','Security Officer']))return; const r=DB.risks.find(x=>x.id===id);
+  confirmDlg('Delete risk "'+r.title+'"?',()=>{ DB.risks=DB.risks.filter(x=>x.id!==id); dbSave(); logAction('Deleted risk '+id); toast('Risk deleted.','info'); renderRisks(); }); }
+
+/* ═════════ COMPLIANCE MANAGEMENT ═════════ */
+let compOpen=null;
+function renderCompliance(){
+  compOpen=compOpen||DB.frameworks[0].id;
+  $('#view').innerHTML=`<div class="flex flex-wrap items-center justify-between gap-3 mb-6">
+    <div><h1 class="text-2xl font-extrabold">Compliance Management</h1><p class="muted text-sm">Framework assessments are <b>demonstrations</b> — not official certifications or legal compliance determinations.</p></div></div>
+  <div class="grid md:grid-cols-3 gap-3 mb-5">
+    ${DB.frameworks.map(f=>{const p=compPctOf(f),s=compStatus(p);return `<div class="card stat-card p-4 cursor-pointer ${compOpen===f.id?'ring-2 ring-cyan-500/50':''}" onclick="compOpen='${f.id}';renderCompliance()">
+      <div class="flex items-start justify-between"><div><b class="text-sm">${f.name}</b><p class="text-[11px] muted mt-1">${f.reqs.filter(r=>r.done).length}/${f.reqs.length} requirements complete</p></div>
+      <span class="badge" style="background:${COMP_COLOR[s]}1c;color:${COMP_COLOR[s]};border:1px solid ${COMP_COLOR[s]}44">${s}</span></div>
+      <div class="progress-track mt-3"><div class="progress-fill" style="width:${p}%;background:${COMP_COLOR[s]}"></div></div>
+      <p class="text-right text-xs font-black mt-1" style="color:${COMP_COLOR[s]}">${p}%</p></div>`;}).join('')}
+  </div>
+  <div id="comp-detail"></div>`;
+  renderCompDetail(); lucide.createIcons();
+}
+function renderCompDetail(){
+  const f=DB.frameworks.find(x=>x.id===compOpen); if(!f)return;
+  const p=compPctOf(f), s=compStatus(p);
+  $('#comp-detail').innerHTML=`<div class="card overflow-hidden">
+    <div class="p-5 border-b" style="border-color:var(--border);background:var(--card2)">
+      <div class="flex flex-wrap items-center justify-between gap-3">
+        <div><h3 class="font-extrabold">${f.name}</h3><p class="text-sm muted max-w-2xl mt-1">${esc(f.desc)}</p></div>
+        <div class="flex items-center gap-3">
+          <div class="text-right"><p class="text-2xl font-black" style="color:${COMP_COLOR[s]}">${p}%</p><p class="text-[10px] muted">Assessed ${fmtD(f.assessDate)}</p></div>
+          <span class="badge" style="background:${COMP_COLOR[s]}1c;color:${COMP_COLOR[s]};border:1px solid ${COMP_COLOR[s]}44">${s}</span></div></div>
+      <div class="progress-track mt-3"><div class="progress-fill" style="width:${p}%;background:${COMP_COLOR[s]}"></div></div></div>
+    <div class="p-5 grid lg:grid-cols-3 gap-5">
+      <div class="lg:col-span-2"><h4 class="font-bold mb-3 text-sm flex items-center gap-2"><i data-lucide="list-checks" class="w-4 h-4 text-cy"></i>Compliance Checklist</h4>
+        <div class="space-y-2">${f.reqs.map((r,idx)=>`
+          <label class="flex items-start gap-3 p-3 rounded-xl border cursor-pointer transition ${r.done?'bg-emerald-500/5':''}" style="border-color:${r.done?'rgba(52,211,153,.35)':'var(--border)'}" ${canEdit()?'':'onclick="return false"'}>
+            <input type="checkbox" class="!w-4 !h-4 mt-.5 accent-emerald-500 shrink-0" ${r.done?'checked':''} ${canEdit()?'':'disabled'} onchange="compToggle('${f.id}',${idx},this.checked)">
+            <span class="min-w-0"><b class="text-xs mono">${r.id}</b><p class="text-sm ${r.done?'':'muted'}">${esc(r.text)}</p></span>
+            <span class="ml-auto badge ${r.done?'bg-emerald-500/10 text-emerald-400 border border-emerald-500/30':'bg-red-500/10 text-red-400 border border-red-500/30'}">${r.done?'Complete':'Missing'}</span></label>`).join('')}</div></div>
+      <div><h4 class="font-bold mb-3 text-sm flex items-center gap-2"><i data-lucide="paperclip" class="w-4 h-4 text-viol"></i>Evidence (${f.evidence.length})</h4>
+        <div class="space-y-2 mb-4">${f.evidence.map((e,idx)=>`<div class="flex items-center gap-2 p-2.5 rounded-lg border text-xs" style="border-color:var(--border);background:var(--card2)">
+          <i data-lucide="file-text" class="w-3.5 h-3.5 text-cy shrink-0"></i><span class="truncate flex-1">${esc(e.name)}</span>
+          ${canEdit()?`<button class="btn btn-danger btn-sm" onclick="compDelEvidence('${f.id}',${idx})"><i data-lucide="x" class="w-3 h-3"></i></button>`:''}</div>`).join('')||'<p class="text-xs muted">No evidence uploaded yet.</p>'}</div>
+        ${canEdit()?`<label class="btn btn-ghost w-full justify-center cursor-pointer"><i data-lucide="upload" class="w-4 h-4"></i>Upload evidence<input type="file" class="hidden" multiple onchange="compUpload('${f.id}',this)"></label>
+        <button class="btn btn-pri w-full justify-center mt-2" onclick="compReassess('${f.id}')"><i data-lucide="refresh-cw" class="w-4 h-4"></i>Mark reassessed today</button>`:''}
+        <div class="p-3 rounded-xl border mt-4 text-xs" style="border-color:var(--border);background:var(--card2)">
+          <p class="font-bold mb-1">Requirement summary</p>
+          <p class="text-emerald-400">✔ ${f.reqs.filter(r=>r.done).length} completed</p>
+          <p class="text-red-400">✖ ${f.reqs.filter(r=>!r.done).length} missing</p></div></div>
+    </div></div>`;
+  lucide.createIcons();
+}
+function compToggle(fid,idx,done){
+  if(!requireRole(['Admin','Security Officer'])){ renderCompDetail(); return; }
+  const f=DB.frameworks.find(x=>x.id===fid); f.reqs[idx].done=done; f.assessDate=today();
+  logAction((done?'Completed':'Reopened')+' requirement '+f.reqs[idx].id+' ('+f.name+')');
+  const p=compPctOf(f);
+  if(p>=90) notify('compliance',f.name+' now Compliant','All critical requirements satisfied ('+p+'%).');
+  dbSave(); renderCompliance();
+}
+function compUpload(fid,input){
+  if(!requireRole(['Admin','Security Officer']))return;
+  const f=DB.frameworks.find(x=>x.id===fid);
+  [...input.files].forEach(file=>{ if(file.size>2*1024*1024){ toast('"' +file.name+'" exceeds the 2MB demo limit — metadata recorded only.','info'); }
+    f.evidence.push({name:file.name,size:file.size,uploaded:today(),by:me().name}); });
+  logAction('Uploaded '+input.files.length+' evidence file(s) to '+f.name); dbSave(); renderCompliance(); toast('Evidence recorded.');
+}
+function compDelEvidence(fid,idx){ if(!requireRole(['Admin','Security Officer']))return; const f=DB.frameworks.find(x=>x.id===fid); f.evidence.splice(idx,1); dbSave(); renderCompliance(); toast('Evidence removed.','info'); }
+function compReassess(fid){ if(!requireRole(['Admin','Security Officer']))return; const f=DB.frameworks.find(x=>x.id===fid); f.assessDate=today(); logAction('Reassessed '+f.name); dbSave(); renderCompliance(); toast(f.name+' reassessment date updated.'); }
+
+/* ═════════ AUDIT MANAGEMENT ═════════ */
+function renderAudits(){
+  $('#view').innerHTML=`<div class="flex flex-wrap items-center justify-between gap-3 mb-6">
+    <div><h1 class="text-2xl font-extrabold">Audit Management</h1><p class="muted text-sm">Schedule audits, assign auditors, track checklists, record findings and recommendations.</p></div>
+    ${canEdit()?`<button class="btn btn-pri" onclick="auditForm()"><i data-lucide="plus" class="w-4 h-4"></i>Schedule Audit</button>`:''}</div>
+  <div class="grid grid-cols-3 gap-3 mb-5">${['Scheduled','In Progress','Completed'].map(s=>`<div class="card stat-card p-4"><p class="text-[11px] muted uppercase tracking-wide">${s==='In Progress'?'In Progress':'Pending'&&s==='Scheduled'?'Scheduled':s}</p><p class="text-2xl font-black mt-1">${DB.audits.filter(a=>a.status===s).length}</p></div>`).join('')}</div>
+  <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-4">
+    ${DB.audits.map(a=>{const overdue=a.status!=='Completed'&&a.due<today();return `<div class="card p-5">
+      <div class="flex items-start justify-between gap-2 mb-2">
+        <div><span class="mono text-[11px] muted">${a.id}</span><h3 class="font-bold leading-tight">${esc(a.title)}</h3></div>
+        <span class="badge ${a.status==='Completed'?'bg-emerald-500/10 text-emerald-400 border border-emerald-500/30':a.status==='In Progress'?'bg-cyan-500/10 text-cy border border-cyan-500/30':'bg-slate-500/10 text-slate-400 border border-slate-500/30'}">${a.status}</span></div>
+      <div class="text-xs space-y-1.5 my-3">
+        <p class="flex items-center gap-2 muted"><i data-lucide="user-check" class="w-3.5 h-3.5"></i>${esc(a.auditor)} · ${esc(a.type)}</p>
+        <p class="flex items-center gap-2 muted"><i data-lucide="calendar" class="w-3.5 h-3.5"></i>${fmtD(a.start)} → ${fmtD(a.due)} ${overdue?'<span class="badge bg-red-500/10 text-red-400 border border-red-500/30 ml-1">Overdue</span>':''}</p>
+        <p class="flex items-center gap-2 muted"><i data-lucide="list-checks" class="w-3.5 h-3.5"></i>${a.checklist.filter(c=>c.d).length}/${a.checklist.length} checklist items</p></div>
+      ${a.findings?`<div class="p-2.5 rounded-lg text-xs mb-3" style="background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.25)"><b>Findings:</b> ${esc(a.findings)}</div>`:''}
+      <div class="flex gap-2">
+        <button class="btn btn-ghost btn-sm flex-1 justify-center" onclick="auditView('${a.id}')"><i data-lucide="eye" class="w-3.5 h-3.5"></i>Details</button>
+        ${canEdit()?`<button class="btn btn-ghost btn-sm" onclick="auditForm('${a.id}')"><i data-lucide="pencil" class="w-3.5 h-3.5"></i></button>
+        <button class="btn btn-danger btn-sm" onclick="auditDel('${a.id}')"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i></button>`:''}</div></div>`;}).join('')}
+  </div>`;
+  lucide.createIcons();
+}
+function auditView(id){ const a=DB.audits.find(x=>x.id===id); if(!a)return;
+  openModal('Audit · '+a.id,`<div class="space-y-4">
+    <div class="p-4 rounded-xl border" style="border-color:var(--border);background:var(--card2)">
+      <h4 class="font-extrabold mb-2">${esc(a.title)}</h4>
+      <div class="grid grid-cols-2 gap-2 text-xs">
+        <p><span class="muted">Type:</span> <b>${esc(a.type)}</b></p><p><span class="muted">Auditor:</span> <b>${esc(a.auditor)}</b></p>
+        <p><span class="muted">Start:</span> <b>${fmtD(a.start)}</b></p><p><span class="muted">Due:</span> <b>${fmtD(a.due)}</b></p>
+        <p><span class="muted">Status:</span> <b>${a.status}</b></p></div></div>
+    <div><p class="text-xs font-bold uppercase tracking-wide muted mb-2">Audit checklist</p>
+      ${a.checklist.map((c,i)=>`<label class="flex items-center gap-2.5 py-1.5 text-sm ${canEdit()?'cursor-pointer':''}">
+        <input type="checkbox" class="!w-4 !h-4 accent-cyan-500" ${c.d?'checked':''} ${canEdit()?'':'disabled'} onchange="auditCheck('${a.id}',${i},this.checked)"><span class="${c.d?'':'muted'}">${esc(c.t)}</span></label>`).join('')}</div>
+    <div><p class="text-xs font-bold uppercase tracking-wide muted mb-1">Findings</p><p class="text-sm">${a.findings?esc(a.findings):'—'}</p></div>
+    <div><p class="text-xs font-bold uppercase tracking-wide muted mb-1">Recommendations</p><p class="text-sm">${a.recs?esc(a.recs):'—'}</p></div></div>`,null,'Close'); }
+function auditCheck(aid,i,done){ if(!requireRole(['Admin','Security Officer'])){ auditView(aid); return; }
+  const a=DB.audits.find(x=>x.id===aid); a.checklist[i].d=done; dbSave(); logAction('Updated audit checklist '+aid); renderAudits(); auditView(aid); }
+function auditForm(id){
+  if(!canEdit()){ toast('Viewers cannot manage audits.','error'); return; }
+  const a=id?DB.audits.find(x=>x.id===id):null;
+  openModal(a?'Edit Audit':'Schedule New Audit',`
+    <div><label>Audit title *</label><input id="af-title" value="${a?esc(a.title):''}" placeholder="e.g. Internal ISMS Audit 2027"></div>
+    <div class="grid grid-cols-2 gap-3">
+      <div><label>Type</label><select id="af-type">${['Internal','External','Third-Party'].map(t=>`<option ${a&&a.type===t?'selected':''}>${t}</option>`).join('')}</select></div>
+      <div><label>Auditor *</label><input id="af-auditor" value="${a?esc(a.auditor):esc(me().name)}"></div>
+      <div><label>Start date *</label><input id="af-start" type="date" value="${a?a.start:today()}"></div>
+      <div><label>Due date *</label><input id="af-due" type="date" value="${a?a.due:daysAgo(-30)}"></div></div>
+    <div><label>Status</label><select id="af-status">${['Scheduled','In Progress','Completed'].map(s=>`<option ${a&&a.status===s?'selected':''}>${s}</option>`).join('')}</select></div>
+    <div><label>Findings</label><textarea id="af-findings" rows="2">${a?esc(a.findings):''}</textarea></div>
+    <div><label>Recommendations</label><textarea id="af-recs" rows="2">${a?esc(a.recs):''}</textarea></div>`,()=>{
+    const title=$('#af-title').value.trim(), auditor=$('#af-auditor').value.trim();
+    const start=$('#af-start').value, due=$('#af-due').value;
+    if(!title||!auditor||!start||!due){ toast('Title, auditor and dates are required.','error'); return false; }
+    if(due<start){ toast('Due date cannot precede start date.','error'); return false; }
+    const data={title,type:$('#af-type').value,auditor,start,due,status:$('#af-status').value,findings:$('#af-findings').value.trim(),recs:$('#af-recs').value.trim()};
+    if(a){ Object.assign(a,data); logAction('Edited audit '+a.id); toast('Audit updated.'); }
+    else{ DB.audits.unshift({id:uid('AUD'),...data,checklist:[{t:'Scope and evidence request confirmed',d:false},{t:'Control design walkthrough completed',d:false},{t:'Sample testing performed',d:false},{t:'Findings draft reviewed',d:false}]}); logAction('Scheduled audit "'+title+'"'); notify('audit','New audit scheduled',title+' assigned to '+auditor+', due '+fmtD(due)+'.'); toast('Audit scheduled.'); }
+    dbSave(); renderAudits(); });
+}
+function auditDel(id){ if(!requireRole(['Admin','Security Officer']))return; const a=DB.audits.find(x=>x.id===id);
+  confirmDlg('Delete audit "'+a.title+'"?',()=>{ DB.audits=DB.audits.filter(x=>x.id!==id); dbSave(); logAction('Deleted audit '+id); toast('Audit deleted.','info'); renderAudits(); }); }
+
+/* ═════════ INCIDENT MANAGEMENT ═════════ */
+let incFilter={q:'',status:''};
+function renderIncidents(){
+  const sts=['Reported','Investigating','Contained','Resolved'];
+  $('#view').innerHTML=`<div class="flex flex-wrap items-center justify-between gap-3 mb-6">
+    <div><h1 class="text-2xl font-extrabold">Incident Management</h1><p class="muted text-sm">Report, classify, respond and resolve security incidents with full timeline tracking.</p></div>
+    ${canEdit()?`<button class="btn btn-pri" onclick="incForm()"><i data-lucide="plus" class="w-4 h-4"></i>Report Incident</button>`:''}</div>
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-5">
+    ${['Critical','High','Medium','Low'].map(s=>`<div class="card stat-card p-4"><p class="text-[11px] muted uppercase tracking-wide">${s} severity · open</p><p class="text-2xl font-black mt-1">${DB.incidents.filter(i=>i.sev===s&&i.status!=='Resolved').length}</p></div>`).join('')}
+  </div>
+  <div class="card overflow-hidden"><div class="p-4 border-b flex flex-wrap gap-3 items-end" style="border-color:var(--border)">
+    <div class="flex-1 min-w-[12rem]"><label>Search</label><input id="ic-q" placeholder="Title, ID, officer…" value="${esc(incFilter.q)}" oninput="incFilter.q=this.value;renderIncTable()"></div>
+    <div><label>Status</label><select id="ic-status" onchange="incFilter.status=this.value;renderIncTable()">
+      <option value="">All</option>${sts.map(s=>`<option ${incFilter.status===s?'selected':''}>${s}</option>`).join('')}</select></div></div>
+    <div class="overflow-x-auto"><table class="tbl w-full min-w-[860px]"><thead><tr><th>ID</th><th>Incident</th><th>Classification</th><th>Severity</th><th>Date</th><th>Officer</th><th>Status</th><th class="text-right">Actions</th></tr></thead><tbody id="inc-rows"></tbody></table></div></div>`;
+  renderIncTable(); lucide.createIcons();
+}
+function incFiltered(){ const q=incFilter.q.toLowerCase();
+  return DB.incidents.filter(i=>(!q||i.title.toLowerCase().includes(q)||i.id.toLowerCase().includes(q)||i.officer.toLowerCase().includes(q))&&(!incFilter.status||i.status===incFilter.status)); }
+function renderIncTable(){
+  const SEVC={Critical:'#f87171',High:'#fb923c',Medium:'#fbbf24',Low:'#34d399'};
+  $('#inc-rows').innerHTML=incFiltered().map(i=>`<tr>
+    <td class="mono text-xs">${i.id}</td>
+    <td><b class="text-sm">${esc(i.title)}</b><p class="text-[11px] muted max-w-[18rem] truncate">${esc(i.desc)}</p></td>
+    <td class="text-xs">${esc(i.cls)}</td>
+    <td><span class="badge" style="background:${SEVC[i.sev]}1c;color:${SEVC[i.sev]};border:1px solid ${SEVC[i.sev]}44">${i.sev}</span></td>
+    <td class="text-xs">${fmtD(i.date)}</td>
+    <td class="text-xs">${esc(i.officer)}</td>
+    <td><span class="badge ${i.status==='Resolved'?'bg-emerald-500/10 text-emerald-400 border border-emerald-500/30':i.status==='Contained'?'bg-cyan-500/10 text-cy border border-cyan-500/30':i.status==='Investigating'?'bg-violet-500/10 text-viol border border-violet-500/30':'bg-amber-500/10 text-amber-400 border border-amber-500/30'}">${i.status}</span></td>
+    <td class="text-right whitespace-nowrap">
+      <button class="btn btn-ghost btn-sm" title="Timeline" onclick="incView('${i.id}')"><i data-lucide="list-tree" class="w-3.5 h-3.5"></i></button>
+      ${canEdit()?`<button class="btn btn-ghost btn-sm" title="Respond / edit" onclick="incForm('${i.id}')"><i data-lucide="pencil" class="w-3.5 h-3.5"></i></button>
+      <button class="btn btn-danger btn-sm" title="Delete" onclick="incDel('${i.id}')"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i></button>`:''}
+    </td></tr>`).join('')||'<tr><td colspan="8" class="text-center muted py-8">No incidents match the current filters.</td></tr>';
+  lucide.createIcons();
+}
+function incView(id){ const i=DB.incidents.find(x=>x.id===id); if(!i)return;
+  const SEVC={Critical:'#f87171',High:'#fb923c',Medium:'#fbbf24',Low:'#34d399'};
+  openModal('Incident · '+i.id,`<div class="space-y-4">
+    <div class="p-4 rounded-xl border" style="border-color:var(--border);background:var(--card2)">
+      <div class="flex items-center gap-2 mb-2"><h4 class="font-extrabold">${esc(i.title)}</h4>
+        <span class="badge" style="background:${SEVC[i.sev]}1c;color:${SEVC[i.sev]};border:1px solid ${SEVC[i.sev]}44">${i.sev}</span>
+        <span class="badge bg-slate-500/10 text-slate-400 border border-slate-500/30">${i.status}</span></div>
+      <p class="text-sm muted mb-2">${esc(i.desc)}</p>
+      <p class="text-xs muted"><b class="text-cy">${esc(i.cls)}</b> · ${fmtD(i.date)} · Officer: <b>${esc(i.officer)}</b></p></div>
+    <div><p class="text-xs font-bold uppercase tracking-wide muted mb-2">Response actions</p><p class="text-sm">${i.actions?esc(i.actions):'—'}</p></div>
+    <div><p class="text-xs font-bold uppercase tracking-wide muted mb-2">Resolution notes</p><p class="text-sm">${i.notes?esc(i.notes):'—'}</p></div>
+    <div><p class="text-xs font-bold uppercase tracking-wide muted mb-2">Incident timeline</p>
+      <div class="space-y-0 max-h-52 overflow-y-auto pr-1">${i.timeline.map((t,x)=>`<div class="flex gap-3">
+        <div class="flex flex-col items-center"><div class="w-2.5 h-2.5 rounded-full mt-1.5 shrink-0" style="background:${x===i.timeline.length-1?'#22d3ee':'var(--border)'}"></div>${x<i.timeline.length-1?'<div class="w-px flex-1" style="background:var(--border)"></div>':''}</div>
+        <div class="pb-3"><p class="text-[10px] mono muted">${esc(t.t)}</p><p class="text-sm">${esc(t.x)}</p></div></div>`).join('')}</div></div></div>`,null,'Close'); }
+function incForm(id){
+  if(!canEdit()){ toast('Viewers cannot manage incidents.','error'); return; }
+  const i=id?DB.incidents.find(x=>x.id===id):null;
+  openModal(i?'Respond / Edit Incident':'Report New Incident',`
+    <div><label>Incident title *</label><input id="if-title" value="${i?esc(i.title):''}" placeholder="e.g. Phishing Email — Fake Invoice"></div>
+    <div class="grid grid-cols-2 gap-3">
+      <div><label>Classification</label><select id="if-cls">${['Phishing','Malware','Ransomware','Unauthorized Access','Data Breach','Network','Other'].map(c=>`<option ${i&&i.cls===c?'selected':''}>${c}</option>`).join('')}</select></div>
+      <div><label>Severity</label><select id="if-sev">${['Critical','High','Medium','Low'].map(s=>`<option ${i&&i.sev===s?'selected':''}>${s}</option>`).join('')}</select></div></div>
+    <div><label>Description *</label><textarea id="if-desc" rows="2">${i?esc(i.desc):''}</textarea></div>
+    <div class="grid grid-cols-2 gap-3">
+      <div><label>Incident date *</label><input id="if-date" type="date" value="${i?i.date:today()}"></div>
+      <div><label>Assigned officer *</label><input id="if-officer" value="${i?esc(i.officer):esc(me().name)}"></div></div>
+    <div><label>Response actions</label><textarea id="if-actions" rows="2">${i?esc(i.actions):''}</textarea></div>
+    <div><label>Resolution notes</label><textarea id="if-notes" rows="2">${i?esc(i.notes):''}</textarea></div>
+    <div><label>Status</label><select id="if-status">${['Reported','Investigating','Contained','Resolved'].map(s=>`<option ${i&&i.status===s?'selected':''}>${s}</option>`).join('')}</select></div>`,()=>{
+    const title=$('#if-title').value.trim(), desc=$('#if-desc').value.trim(), officer=$('#if-officer').value.trim(), date=$('#if-date').value;
+    if(!title||!desc||!officer||!date){ toast('Title, description, officer and date are required.','error'); return false; }
+    const data={title,cls:$('#if-cls').value,sev:$('#if-sev').value,desc,date,officer,actions:$('#if-actions').value.trim(),notes:$('#if-notes').value.trim(),status:$('#if-status').value};
+    if(i){ const was=i.status; Object.assign(i,data);
+      if(i.status==='Resolved'&&was!=='Resolved'){ i.resolvedDate=today(); i.timeline.push({t:new Date().toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'}),x:'Marked as Resolved by '+me().name}); }
+      logAction('Updated incident '+i.id); toast('Incident updated.'); }
+    else{ DB.incidents.unshift({id:uid('INC'),...data,resolvedDate:null,timeline:[{t:new Date().toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'}),x:'Reported by '+me().name}]});
+      logAction('Reported incident "'+title+'"');
+      if(data.sev==='Critical'||data.sev==='High') notify('incident','New '+data.sev+' incident',title+' ('+data.cls+') reported by '+me().name+'.');
+      toast('Incident reported.'); }
+    dbSave(); updateIncBadge(); renderIncidents(); });
+}
+function incDel(id){ if(!requireRole(['Admin','Security Officer']))return; const i=DB.incidents.find(x=>x.id===id);
+  confirmDlg('Delete incident "'+i.title+'"?',()=>{ DB.incidents=DB.incidents.filter(x=>x.id!==id); dbSave(); logAction('Deleted incident '+id); toast('Incident deleted.','info'); updateIncBadge(); renderIncidents(); }); }
+
+/* ═════════ REPORTS ═════════ */
+let reportType='risk';
+function renderReports(){
+  const v=$('#view');
+  v.innerHTML=`<div class="flex flex-wrap items-center justify-between gap-3 mb-6">
+    <div><h1 class="text-2xl font-extrabold">Reports & Analytics</h1><p class="muted text-sm">Generate reports from live database records — filter by date range, export PDF or print.</p></div>
+    <div class="flex gap-2">
+      <button class="btn btn-ghost" onclick="window.print()"><i data-lucide="printer" class="w-4 h-4"></i>Print</button>
+      <button class="btn btn-pri" onclick="exportPDF()"><i data-lucide="file-down" class="w-4 h-4"></i>Export PDF</button></div></div>
+  <div class="card p-4 mb-5 flex flex-wrap gap-3 items-end">
+    <div><label>Report type</label><select id="rp-type" onchange="reportType=this.value;renderReportBody()">
+      ${[['risk','Risk Assessment Report'],['compliance','Compliance Report'],['audit','Audit Report'],['incident','Incident Report'],['governance','Governance Report'],['docs','Document Vault Report']].map(([val,lbl])=>`<option value="${val}" ${reportType===val?'selected':''}>${lbl}</option>`).join('')}</select></div>
+    <div><label>From date</label><input id="rp-from" type="date" value="${daysAgo(90)}" onchange="renderReportBody()"></div>
+    <div><label>To date</label><input id="rp-to" type="date" value="${today()}" onchange="renderReportBody()"></div>
+    <div class="ml-auto text-xs muted self-center">Generated ${new Date().toLocaleString()} by ${esc(me().name)}</div>
+  </div>
+  <div id="print-area" class="card p-6"></div>`;
+  lucide.createIcons(); renderReportBody();
+}
+function inRange(d){ const f=$('#rp-from').value, t=$('#rp-to').value; return (!f||d>=f)&&(!t||d<=t); }
+function renderReportBody(){
+  reportType=$('#rp-type')?$('#rp-type').value:reportType;
+  const el=$('#print-area'); const gen=`<p class="text-[11px] uppercase tracking-widest text-cyan-500 font-bold mb-4">Generated from GRC SHIELD · CyberTech Solutions · Academic demonstration</p>`;
+  let html='', tableRows='';
+  if(reportType==='risk'){
+    const rows=DB.risks.filter(r=>inRange(r.created));
+    html=`<h2 class="text-xl font-extrabold mb-1">Risk Assessment Report</h2><p class="text-sm muted mb-5">${rows.length} risks identified in selected period · Generated by ${esc(me().name)}</p>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-5">
+      ${['Low','Medium','High','Critical'].map(l=>{const n=rows.filter(r=>r.level===l).length;return `<div class="p-3 rounded-xl border" style="border-color:var(--border)"><p class="text-xs muted">${l}</p><p class="text-2xl font-extrabold" style="color:${LEVEL_COLOR[l]}">${n}</p></div>`;}).join('')}</div>
+    <h3 class="font-bold mb-2">Risk register extract</h3>`;
+    tableRows=rows.map(r=>[r.id,r.title,r.cat,r.l+'×'+iSafe(r.i),String(r.score),r.level,r.owner,r.status]).map(cells=>cells.map(esc));
+  } else if(reportType==='compliance'){
+    html=`<h2 class="text-xl font-extrabold mb-1">Compliance Report</h2><p class="text-sm muted mb-5">Framework posture as of ${fmtD(today())} · Demonstration assessment — not an official certification.</p>
+    <div class="space-y-4 mb-5">${DB.frameworks.map(f=>{const p=compPctOf(f),s=compStatus(p);return `<div>
+      <div class="flex justify-between text-sm mb-1"><b>${f.name}</b><span class="badge" style="background:${COMP_COLOR[s]}1c;color:${COMP_COLOR[s]};border:1px solid ${COMP_COLOR[s]}44">${s} · ${p}%</span></div>
+      <div class="progress-track"><div class="progress-fill" style="width:${p}%;background:${COMP_COLOR[s]}"></div></div>
+      <p class="text-[11px] muted mt-1">${f.reqs.filter(r=>r.done).length}/${f.reqs.length} requirements complete · assessed ${fmtD(f.assessDate)} · evidence files: ${f.evidence.length}</p></div>`;}).join('')}</div>
+    <h3 class="font-bold mb-2">Requirement detail</h3>`;
+    tableRows=DB.frameworks.flatMap(f=>f.reqs.map(r=>[r.id,f.name,r.text,r.done?'Completed':'Missing']));
+  } else if(reportType==='audit'){
+    const rows=DB.audits.filter(a=>inRange(a.start)||inRange(a.due));
+    html=`<h2 class="text-xl font-extrabold mb-1">Audit Report</h2><p class="text-sm muted mb-5">${rows.length} audits in selected period · ${rows.filter(a=>a.status==='Completed').length} completed</p>`;
+    tableRows=rows.map(a=>[a.id,a.title,a.type,a.auditor,fmtD(a.start),fmtD(a.due),a.status,a.findings||'—']);
+  } else if(reportType==='incident'){
+    const rows=DB.incidents.filter(i=>inRange(i.date));
+    const crit=rows.filter(i=>i.sev==='Critical'||i.sev==='High').length;
+    html=`<h2 class="text-xl font-extrabold mb-1">Incident Report</h2><p class="text-sm muted mb-5">${rows.length} incidents in selected period · ${crit} high/critical severity · ${rows.filter(i=>i.status==='Resolved').length} resolved</p>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-5">${['Critical','High','Medium','Low'].map(s=>`<div class="p-3 rounded-xl border" style="border-color:var(--border)"><p class="text-xs muted">${s}</p><p class="text-2xl font-extrabold">${rows.filter(i=>i.sev===s).length}</p></div>`).join('')}</div>
+    <h3 class="font-bold mb-2">Incident log</h3>`;
+    tableRows=rows.map(i=>[i.id,i.title,i.cls,i.sev,fmtD(i.date),i.officer,i.status,i.desc]);
+  } else if(reportType==='docs'){
+    const rows=DB.documents;
+    html=`<h2 class="text-xl font-extrabold mb-1">Document Vault Report</h2><p class="text-sm muted mb-5">${rows.length} documents · ${rows.filter(d=>d.cls==='Confidential').length} confidential · ${rows.filter(d=>d.src==='OCR Scan').length} scanned via OCR · all access logged</p>`;
+    tableRows=rows.map(d=>[d.id,d.name,d.cls,d.src,fmtD(d.date),d.by,(d.text||'').slice(0,120)]);
+  } else {
+    const rows=DB.policies.filter(p=>inRange(p.updated));
+    html=`<h2 class="text-xl font-extrabold mb-1">Governance Report</h2><p class="text-sm muted mb-5">${DB.policies.length} policies in library · ${DB.policies.filter(p=>p.status==='Approved').length} approved · ${DB.policies.filter(p=>p.status==='Pending Approval').length} pending approval</p>
+    <div class="grid grid-cols-3 gap-3 mb-5">${['Approved','Pending Approval','Draft'].map(s=>`<div class="p-3 rounded-xl border" style="border-color:var(--border)"><p class="text-xs muted">${s}</p><p class="text-2xl font-extrabold">${DB.policies.filter(p=>p.status===s).length}</p></div>`).join('')}</div>
+    <h3 class="font-bold mb-2">Policy library</h3>`;
+    tableRows=rows.map(p=>[p.id,p.name,p.owner,fmtD(p.created),fmtD(p.updated),p.status,p.desc]);
+  }
+  const heads={risk:['ID','Risk','Category','L×I','Score','Level','Owner','Status'],compliance:['Req ID','Framework','Requirement','Status'],audit:['ID','Audit','Type','Auditor','Start','Due','Status','Findings'],incident:['ID','Incident','Class','Severity','Date','Officer','Status','Description'],governance:['ID','Policy','Owner','Created','Updated','Status','Description'],docs:['ID','Document','Classification','Source','Uploaded','By','Preview']}[reportType];
+  el.innerHTML=gen+html+`<div class="overflow-x-auto"><table class="tbl w-full min-w-[640px]"><thead><tr>${heads.map(h=>`<th>${h}</th>`).join('')}</tr></thead>
+    <tbody>${tableRows.map(r=>`<tr>${r.map(c=>`<td class="text-xs">${c}</td>`).join('')}</tr>`).join('')||'<tr><td class="text-center muted py-6" colspan="'+heads.length+'">No records in the selected date range.</td></tr>'}</tbody></table></div>
+    <p class="text-[10px] muted mt-6">© 2026 CyberTech Solutions — GRC SHIELD demonstration platform. This report is generated for academic demonstration purposes and does not constitute an official audit, certification, or legal compliance determination.</p>`;
+  lucide.createIcons();
+}
+const iSafe=x=>x;
+function exportPDF(){
+  try{
+    const {jsPDF}=window.jspdf; const doc=new jsPDF('l','pt','a4'); const el=$('#print-area');
+    doc.setFontSize(15); doc.setTextColor(8,145,178);
+    doc.text('GRC SHIELD — CyberTech Solutions — '+doc.splitTextToSize(el.querySelector('h2')?.textContent||'Report',700)[0],40,45);
+    doc.setFontSize(8); doc.setTextColor(100);
+    doc.text('Generated '+new Date().toLocaleString()+' by '+me().name+' · Academic demonstration — not an official certification.',40,62);
+    const table=el.querySelector('table'); let y=82;
+    if(table){ const rows=[...table.querySelectorAll('tr')].map(tr=>[...tr.children].map(td=>td.textContent.trim()));
+      rows.forEach((row,ri)=>{ if(y>540){doc.addPage();y=60;}
+        doc.setFontSize(7.5); doc.setTextColor(ri===0?8:60,ri===0?145:60,ri===0?178:60);
+        doc.text(doc.splitTextToSize(row.join('   |   '),720)[0],40,y); y+=ri===0?18:14; }); }
+    else { doc.setFontSize(10); doc.text(doc.splitTextToSize(el.innerText.replace(/\s+/g,' ').slice(0,3000),700),40,y); }
+    doc.save('grc-shield-'+reportType+'-report.pdf'); toast('PDF downloaded successfully.');
+  }catch(e){ toast('PDF engine unavailable — using print-to-PDF instead.','info'); window.print(); }
+}
+
+/* ═════════ USER MANAGEMENT (Admin) ═════════ */
+function renderUsers(){
+  if(me().role!=='Admin'){ $('#view').innerHTML='<p class="muted">Admin access required.</p>'; return; }
+  const v=$('#view');
+  v.innerHTML=`<div class="flex flex-wrap items-center justify-between gap-3 mb-6">
+    <div><h1 class="text-2xl font-extrabold">User Management</h1><p class="muted text-sm">Role-based access control — Admin · Security Officer · Viewer. Permissions are enforced on every action.</p></div>
+    <button class="btn btn-pri" onclick="userForm()"><i data-lucide="user-plus" class="w-4 h-4"></i>Add User</button></div>
+  <div class="grid lg:grid-cols-3 gap-4">
+    <div class="card overflow-hidden lg:col-span-2"><div class="p-4 border-b font-bold flex items-center gap-2" style="border-color:var(--border)"><i data-lucide="users" class="w-4 h-4 text-cy"></i>Users (${DB.users.length})</div>
+      <div class="overflow-x-auto"><table class="tbl w-full min-w-[620px]"><thead><tr><th>User</th><th>Role</th><th>Joined</th><th>Status</th><th class="text-right">Actions</th></tr></thead><tbody>
+      ${DB.users.map(u=>`<tr>
+        <td><div class="flex items-center gap-3"><div class="w-8 h-8 rounded-full bg-gradient-to-br from-violet-500 to-cyan-500 flex items-center justify-center text-white text-xs font-bold">${u.name.split(' ').map(x=>x[0]).join('').slice(0,2).toUpperCase()}</div>
+          <div><b class="text-sm">${esc(u.name)}</b><p class="text-[11px] muted">${esc(u.email)} · ${esc(u.title||'')}</p></div></div></td>
+        <td><span class="badge ${u.role==='Admin'?'bg-red-500/10 text-red-400 border border-red-500/30':u.role==='Security Officer'?'bg-violet-500/10 text-viol border border-violet-500/30':'bg-slate-500/10 text-slate-400 border border-slate-500/30'}">${u.role}</span></td>
+        <td class="text-xs">${fmtD(u.created)}</td>
+        <td>${u.active?'<span class="badge bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">Active</span>':'<span class="badge bg-slate-500/10 text-slate-400 border border-slate-500/30">Inactive</span>'}</td>
+        <td class="text-right whitespace-nowrap">
+          <button class="btn btn-ghost btn-sm" title="Edit" onclick="userForm('${u.id}')"><i data-lucide="pencil" class="w-3.5 h-3.5"></i></button>
+          ${u.id!==session.uid?`<button class="btn btn-ghost btn-sm ${u.active?'!text-amber-400':'!text-emerald-400'}" title="${u.active?'Deactivate':'Activate'}" onclick="userToggle('${u.id}')"><i data-lucide="${u.active?'user-x':'user-check'}" class="w-3.5 h-3.5"></i></button>
+          <button class="btn btn-danger btn-sm" title="Delete" onclick="userDel('${u.id}')"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i></button>`:'<span class="text-[10px] muted">(you)</span>'}
+        </td></tr>`).join('')}
+      </tbody></table></div></div>
+    <div class="card p-5"><h3 class="font-bold mb-3 flex items-center gap-2"><i data-lucide="activity" class="w-4 h-4 text-viol"></i>Activity Logs</h3>
+      <div class="space-y-3 max-h-[30rem] overflow-y-auto pr-1">${DB.logs.map(l=>`
+        <div class="flex gap-3 items-start"><div class="w-7 h-7 rounded-lg bg-violet-500/10 text-viol flex items-center justify-center shrink-0"><i data-lucide="user" class="w-3.5 h-3.5"></i></div>
+        <div><p class="text-sm">${esc(l.action)}</p><p class="text-[11px] muted">${esc(l.user)} · ${esc(l.time)}</p></div></div>`).join('')||'<p class="text-sm muted">No activity yet.</p>'}</div></div>
+  </div>`;
+  lucide.createIcons();
+}
+function userForm(id){
+  if(!requireRole(['Admin']))return;
+  const u=id?DB.users.find(x=>x.id===id):null;
+  openModal(u?'Edit User':'Add User', `
+    <div><label>Full name *</label><input id="uf-name" value="${u?esc(u.name):''}"></div>
+    <div><label>Email *</label><input id="uf-email" type="email" value="${u?esc(u.email):''}"></div>
+    ${u?'':`<div><label>Password (min 8 chars) *</label><input id="uf-pass" type="password"></div>`}
+    <div><label>Job title</label><input id="uf-title" value="${u?esc(u.title||''):''}"></div>
+    <div><label>Role</label><select id="uf-role">${['Admin','Security Officer','Viewer'].map(r=>`<option ${u&&u.role===r?'selected':''}>${r}</option>`).join('')}</select></div>
+    <div class="p-3 rounded-lg bg-violet-500/10 border border-violet-500/25 text-xs text-viol">Role permissions: Admin = full access + user management · Security Officer = manage GRC modules · Viewer = read-only dashboards & reports.</div>`, ()=>{
+    const name=$('#uf-name').value.trim(), email=$('#uf-email').value.trim().toLowerCase();
+    if(!name||!email){ toast('Name and email are required.','error'); return false; }
+    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){ toast('Enter a valid email.','error'); return false; }
+    if(DB.users.find(x=>x.email.toLowerCase()===email&&x.id!==id)){ toast('Email already in use.','error'); return false; }
+    if(u){ Object.assign(u,{name,email,title:$('#uf-title').value.trim(),role:$('#uf-role').value});
+      logAction('Edited user '+email); toast('User updated.'); }
+    else{ const p=$('#uf-pass').value; if(p.length<8){ toast('Password must be at least 8 characters.','error'); return false; }
+      DB.users.push({id:uid('u'),name,email,pass:hashPassword(p),title:$('#uf-title').value.trim(),role:$('#uf-role').value,active:true,created:today()});
+      logAction('Created user '+email); notify('policy','New user added',name+' added with role '+$('#uf-role').value+'.'); toast('User created.'); }
+    dbSave(); renderUsers(); });
+}
+function userToggle(id){ if(!requireRole(['Admin']))return; const u=DB.users.find(x=>x.id===id);
+  confirmDlg((u.active?'Deactivate':'Activate')+' user '+u.name+'?',()=>{ u.active=!u.active; dbSave(); logAction((u.active?'Activated':'Deactivated')+' user '+u.email); toast('User '+(u.active?'activated':'deactivated')+'.','info'); renderUsers(); }); }
+function userDel(id){ if(!requireRole(['Admin']))return; const u=DB.users.find(x=>x.id===id);
+  confirmDlg('Permanently delete user '+u.name+'?',()=>{ DB.users=DB.users.filter(x=>x.id!==id); dbSave(); logAction('Deleted user '+u.email); toast('User deleted.','info'); renderUsers(); }); }
+
+/* ═════════ SETTINGS ═════════ */
+function renderSettings(){
+  const u=me();
+  $('#view').innerHTML=`<h1 class="text-2xl font-extrabold mb-1">Settings</h1><p class="muted text-sm mb-6">Profile, security and platform preferences.</p>
+  <div class="grid lg:grid-cols-2 gap-4">
+    <div class="card p-6"><h3 class="font-bold mb-4 flex items-center gap-2"><i data-lucide="user-cog" class="w-4 h-4 text-cy"></i>User Profile</h3>
+      <div class="space-y-4">
+        <div><label>Full name</label><input id="sf-name" value="${esc(u.name)}"></div>
+        <div><label>Job title</label><input id="sf-title" value="${esc(u.title||'')}"></div>
+        <div><label>Email</label><input value="${esc(u.email)}" disabled class="opacity-50"></div>
+        <div><label>Role</label><input value="${u.role}" disabled class="opacity-50"></div>
+        <button class="btn btn-pri" onclick="saveProfile()"><i data-lucide="save" class="w-4 h-4"></i>Save Profile</button></div></div>
+    <div class="card p-6"><h3 class="font-bold mb-4 flex items-center gap-2"><i data-lucide="key-round" class="w-4 h-4 text-viol"></i>Change Password</h3>
+      <div class="space-y-4">
+        <div><label>Current password</label><input id="sf-old" type="password"></div>
+        <div><label>New password (min 8 chars)</label><input id="sf-new" type="password"></div>
+        <div><label>Confirm new password</label><input id="sf-new2" type="password"></div>
+        <button class="btn btn-pri" onclick="changePassword()"><i data-lucide="lock" class="w-4 h-4"></i>Update Password</button></div></div>
+    <div class="card p-6"><h3 class="font-bold mb-4 flex items-center gap-2"><i data-lucide="bell-ring" class="w-4 h-4 text-amber-400"></i>Notification Preferences</h3>
+      <div class="space-y-3">${[['notif_risk','Critical risks'],['notif_incident','New security incidents'],['notif_audit','Pending & completed audits'],['notif_policy','Policy approval requests'],['notif_compliance','Compliance updates']].map(([k,l])=>{
+        const prefs=DB.prefs||{}; const cur=u.prefs&&u.prefs[k]!==undefined?u.prefs[k]:true;
+        return `<label class="flex items-center justify-between p-3 rounded-lg border cursor-pointer" style="border-color:var(--border)"><span class="text-sm">${l}</span>
+          <input type="checkbox" class="!w-4 !h-4 accent-cyan-500" ${cur?'checked':''} onchange="setPref('${k}',this.checked)"></label>`;}).join('')}</div></div>
+    <div class="card p-6"><h3 class="font-bold mb-4 flex items-center gap-2"><i data-lucide="shield-check" class="w-4 h-4 text-cy"></i>Security Center</h3>
+      <div class="space-y-3">
+        <div class="p-3 rounded-lg border text-xs space-y-1" style="border-color:var(--border);background:var(--card2)">
+          <p class="font-bold mb-1">Active protections</p>
+          <p class="text-emerald-400">✔ Encrypted local storage layer</p>
+          <p class="text-emerald-400">✔ Login lockout after 5 failed attempts (30s)</p>
+          <p class="text-emerald-400">✔ 30-minute inactivity session timeout</p>
+          <p class="text-emerald-400">✔ Full audit trail of sign-ins &amp; actions</p>
+          <p class="text-emerald-400">✔ Role-based access control (RBAC)</p></div>
+        <div><p class="text-xs font-bold uppercase tracking-wide muted mb-2">Recent sign-in attempts</p>
+          <div class="space-y-2 max-h-40 overflow-y-auto pr-1">${(DB.loginHistory||[]).slice(0,8).map(h=>`<div class="flex items-center gap-2 text-[11px]"><span class="w-2 h-2 rounded-full shrink-0 ${h.ok?'bg-emerald-400':'bg-red-400'}"></span><span class="truncate flex-1">${esc(h.email)}</span><span class="muted whitespace-nowrap">${esc(h.time)}</span></div>`).join('')||'<p class="text-xs muted">No sign-in records yet.</p>'}</div></div></div></div>
+    <div class="card p-6"><h3 class="font-bold mb-4 flex items-center gap-2"><i data-lucide="palette" class="w-4 h-4 text-emerald-400"></i>Theme & Session</h3>
+      <div class="space-y-3">
+        <button class="btn btn-ghost w-full justify-center" onclick="toggleTheme()"><i data-lucide="sun-medium" class="w-4 h-4"></i>Toggle light / dark mode</button>
+        <div class="p-3 rounded-lg border text-xs muted" style="border-color:var(--border)">Current theme: <b id="sf-theme" class="text-cy">${document.documentElement.classList.contains('dark')?'Dark':'Light'}</b> navy</div>
+        <button class="btn btn-danger w-full justify-center" onclick="logout()"><i data-lucide="log-out" class="w-4 h-4"></i>Logout</button></div></div>
+  </div>`;
+  lucide.createIcons();
+}
+function saveProfile(){ const u=me(); const n=$('#sf-name').value.trim(); if(!n){ toast('Name cannot be empty.','error'); return; }
+  u.name=n; u.title=$('#sf-title').value.trim(); dbSave(); $('#sb-user-name').textContent=u.name; $('#hdr-user').textContent=u.name; $('#sb-avatar').textContent=u.name.split(' ').map(x=>x[0]).join('').slice(0,2).toUpperCase();
+  logAction('Updated profile'); toast('Profile saved.'); }
+function changePassword(){ const u=me();
+  if(hashPassword($('#sf-old').value)!==u.pass){ toast('Current password is incorrect.','error'); return; }
+  const p1=$('#sf-new').value,p2=$('#sf-new2').value;
+  if(p1.length<8){ toast('New password must be at least 8 characters.','error'); return; }
+  if(p1!==p2){ toast('New passwords do not match.','error'); return; }
+  u.pass=hashPassword(p1); dbSave(); logAction('Changed password'); toast('Password updated.'); $('#sf-old').value=$('#sf-new').value=$('#sf-new2').value=''; }
+function setPref(k,val){ me().prefs=me().prefs||{}; me().prefs[k]=val; dbSave(); toast('Preference saved.','info'); }
+
+/* ═════════ DOCUMENT SCANNER & VAULT ═════════ */
+let scanState={file:null,img:null,text:'',parsed:null};
+function renderDocs(){
+  $('#view').innerHTML=`<div class="flex flex-wrap items-center justify-between gap-3 mb-6">
+    <div><h1 class="text-2xl font-extrabold">Document Scanner &amp; Vault</h1><p class="muted text-sm">Scan documents with on-device OCR to auto-extract data, then update risks, incidents or policies in one click.</p></div>
+    ${canEdit()?`<button class="btn btn-pri" onclick="docForm()"><i data-lucide="file-up" class="w-4 h-4"></i>Upload Document</button>`:''}</div>
+  <div class="grid lg:grid-cols-5 gap-4 mb-5">
+    <div class="card p-5 lg:col-span-2">
+      <h3 class="font-bold mb-1 flex items-center gap-2"><i data-lucide="scan-line" class="w-4 h-4 text-cy"></i>Scan &amp; Extract</h3>
+      <p class="text-xs muted mb-4">Drop an image (JPG/PNG/WEBP) or tap to select — OCR runs 100% in your browser. Nothing is uploaded anywhere.</p>
+      <label id="scan-drop" class="flex flex-col items-center justify-center gap-2 rounded-2xl border-2 border-dashed cursor-pointer py-10 transition" style="border-color:var(--border);background:var(--card2)" ondragover="event.preventDefault();this.style.borderColor='var(--cyan)'" ondragleave="this.style.borderColor='var(--border)'" ondrop="scanDrop(event)">
+        <i data-lucide="file-image" class="w-10 h-10 text-cy"></i>
+        <p class="text-sm font-semibold text-center px-4">Choose or drop a document image</p>
+        <p class="text-[11px] muted">OCR engine loads once, then scans instantly</p>
+        <input type="file" accept="image/*" class="hidden" onchange="scanPick(this)"></label>
+      <div id="scan-preview" class="hidden mt-4">
+        <img id="scan-img" alt="scanned document preview" class="w-full rounded-xl border max-h-52 object-contain" style="border-color:var(--border)">
+        <div class="progress-track mt-3"><div class="progress-fill" id="scan-bar" style="width:0%;background:linear-gradient(90deg,#22d3ee,#3b82f6)"></div></div>
+        <p class="text-[11px] muted mt-1" id="scan-status">Ready.</p>
+        <button class="btn btn-pri w-full justify-center mt-3" id="scan-run" onclick="runScan()"><i data-lucide="scan" class="w-4 h-4"></i>Run OCR Scan</button></div></div>
+    <div class="card p-5 lg:col-span-3">
+      <div class="flex items-center justify-between mb-3 gap-2 flex-wrap">
+        <h3 class="font-bold flex items-center gap-2"><i data-lucide="sparkles" class="w-4 h-4 text-viol"></i>Extracted Data <span class="badge bg-violet-500/10 text-viol border border-violet-500/30">Auto-Update</span></h3>
+        ${canEdit()?`<button class="btn btn-ghost btn-sm" onclick="smartParse()" id="parse-btn" disabled><i data-lucide="wand-2" class="w-3.5 h-3.5"></i>Smart Parse</button>`:''}</div>
+      <textarea id="scan-text" rows="7" class="mono !text-xs" placeholder="Scanned text will appear here — you can edit it before parsing…" ${canEdit()?'':'disabled'}></textarea>
+      <div id="parsed-box" class="hidden mt-4"></div>
+      <div id="create-box" class="hidden mt-4 p-4 rounded-xl border" style="border-color:var(--border);background:var(--card2)">
+        <p class="text-xs font-bold uppercase tracking-wide muted mb-3">Review fields &amp; update GRC records from this document</p>
+        <div class="grid sm:grid-cols-2 gap-3" id="cr-fields"></div>
+        <div class="flex flex-wrap gap-2 mt-4">
+          <button class="btn btn-pri btn-sm" onclick="createFromDoc('risk')"><i data-lucide="alert-triangle" class="w-3.5 h-3.5"></i>Add as Risk</button>
+          <button class="btn btn-ghost btn-sm" onclick="createFromDoc('incident')"><i data-lucide="siren" class="w-3.5 h-3.5"></i>Add as Incident</button>
+          <button class="btn btn-ghost btn-sm" onclick="createFromDoc('policy')"><i data-lucide="scroll-text" class="w-3.5 h-3.5"></i>Add as Policy</button></div></div></div></div>
+  <div class="card overflow-hidden">
+    <div class="p-4 border-b font-bold flex items-center gap-2 flex-wrap" style="border-color:var(--border)"><i data-lucide="folder-lock" class="w-4 h-4 text-cy"></i>Document Vault (${DB.documents.length}) <span class="text-[10px] muted font-normal ml-auto">all access is logged · RBAC enforced</span></div>
+    <div class="overflow-x-auto"><table class="tbl w-full min-w-[680px]"><thead><tr><th>Document</th><th>Classification</th><th>Source</th><th>Uploaded</th><th>By</th><th>OCR</th><th class="text-right">Actions</th></tr></thead>
+    <tbody>${DB.documents.map(d=>{const dc={'Confidential':'#f87171','Internal':'#fbbf24','Public':'#34d399'}[d.cls];return `<tr>
+      <td><b class="text-sm">${esc(d.name)}</b><p class="text-[11px] muted max-w-[18rem] truncate">${esc((d.text||'').slice(0,80))}</p></td>
+      <td><span class="badge" style="background:${dc}1c;color:${dc};border:1px solid ${dc}44">${d.cls}</span></td>
+      <td class="text-xs">${esc(d.src)}</td><td class="text-xs">${fmtD(d.date)}</td><td class="text-xs">${esc(d.by)}</td>
+      <td>${d.text?'<i data-lucide="badge-check" class="w-4 h-4 text-emerald-400"></i>':'<i data-lucide="minus" class="w-4 h-4 muted"></i>'}</td>
+      <td class="text-right whitespace-nowrap">
+        <button class="btn btn-ghost btn-sm" onclick="docView('${d.id}')" title="View"><i data-lucide="eye" class="w-3.5 h-3.5"></i></button>
+        ${canEdit()?`<button class="btn btn-danger btn-sm" onclick="docDel('${d.id}')"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i></button>`:''}</td></tr>`;}).join('')||'<tr><td colspan="7" class="text-center muted py-8">No documents yet — scan or upload one.</td></tr>'}</tbody></table></div></div>`;
+  lucide.createIcons();
+}
+function scanPick(inp){ if(!inp.files||!inp.files[0])return; scanFile(inp.files[0]); }
+function scanDrop(e){ e.preventDefault(); e.stopPropagation(); const f=e.dataTransfer.files&&e.dataTransfer.files[0]; if(f)scanFile(f); }
+function scanFile(f){
+  if(!f.type.startsWith('image/')){ toast('Please choose an image file (JPG/PNG/WEBP).','error'); return; }
+  scanState={file:f,img:null,text:'',parsed:null};
+  const r=new FileReader();
+  r.onload=ev=>{ $('#scan-img').src=ev.target.result; $('#scan-preview').classList.remove('hidden'); $('#scan-bar').style.width='0%';
+    $('#scan-status').textContent='Ready — "'+f.name+'" ('+Math.round(f.size/1024)+' KB). Run the scan.';
+    scanState.img=ev.target.result; const pb=$('#parse-btn'); if(pb)pb.disabled=true; lucide.createIcons(); };
+  r.readAsDataURL(f);
+}
+async function runScan(){
+  if(!scanState.img){ toast('Select a document image first.','error'); return; }
+  const btn=$('#scan-run'); btn.disabled=true;
+  try{
+    if(typeof Tesseract==='undefined'){ toast('OCR engine still loading — please retry in a moment.','info'); btn.disabled=false; return; }
+    $('#scan-status').textContent='Loading OCR engine (first run downloads language data)…';
+    const res=await Tesseract.recognize(scanState.img,'eng',{logger:m=>{ if(m.status==='recognizing text'){ $('#scan-bar').style.width=Math.round(m.progress*100)+'%'; $('#scan-status').textContent='Scanning… '+Math.round(m.progress*100)+'%'; } }});
+    const txt=(res.data.text||'').trim();
+    scanState.text=txt; $('#scan-text').value=txt;
+    $('#scan-status').textContent='Scan complete — '+(txt?txt.split(/\s+/).length+' words extracted.':'no readable text found. Try a clearer, higher-resolution image.');
+    const pb=$('#parse-btn'); if(pb)pb.disabled=!txt;
+    if(txt){ logAction('Scanned document "'+scanState.file.name+'"'); dbSave(); toast('Scan complete — text extracted.'); }
+  }catch(e){ toast('Scan failed: '+((e&&e.message)||e),'error'); }
+  btn.disabled=false; lucide.createIcons();
+}
+function normalizeDocDate(d){ if(!d)return today(); if(d.indexOf('/')>-1){const p=d.split('/');return p[2]+'-'+p[1]+'-'+p[0];} return d; }
+function smartParse(){
+  const txt=$('#scan-text').value; if(!txt.trim()){ toast('No text to parse.','error'); return; }
+  const low=txt.toLowerCase();
+  const title=(txt.split('\n').find(l=>l.trim())||'Scanned Document').trim().slice(0,80);
+  let sev=(low.match(/\b(critical|high|medium|low)\b/)||[])[1]; if(sev)sev=sev[0].toUpperCase()+sev.slice(1);
+  const nums=txt.match(/\b[1-5]\b/g)||[];
+  const dates=txt.match(/\d{4}-\d{2}-\d{2}|\d{2}\/\d{2}\/\d{4}/g)||[];
+  const firstName=(me().name.split(' ')[0]||'').toLowerCase();
+  const owner=(DB.users.find(u=>low.indexOf(u.name.toLowerCase().split(' ')[0])>-1&&u.name.split(' ')[0].toLowerCase()!==firstName)||me()).name;
+  const cat=/phish|ransom|malware|breach|cloud|insider|ddos/.test(low)?'Cyber':'Operational';
+  scanState.parsed={title:title,sev:['Critical','High','Medium','Low'].indexOf(sev)>-1?sev:'Medium',l:parseInt(nums[0])||3,i:parseInt(nums[1])||3,date:normalizeDocDate(dates[0]),owner:owner,cat:cat,raw:txt};
+  const p=scanState.parsed;
+  $('#parsed-box').classList.remove('hidden');
+  $('#parsed-box').innerHTML=`<div class="p-4 rounded-xl border" style="border-color:rgba(167,139,250,.35);background:rgba(167,139,250,.07)">
+    <p class="text-xs font-bold uppercase tracking-wide text-viol mb-3 flex items-center gap-2"><i data-lucide="sparkles" class="w-3.5 h-3.5"></i>Auto-detected fields — review before creating</p>
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-x-4 gap-y-2 text-xs">
+      ${[['Title',p.title],['Severity',p.sev],['Likelihood',p.l+'/5'],['Impact',p.i+'/5'],['Date',p.date],['Owner',p.owner],['Category',p.cat],['Words',txt.split(/\s+/).length]].map(([k,v])=>`<p><span class="muted">${k}:</span> <b>${esc(v)}</b></p>`).join('')}</div></div>`;
+  $('#create-box').classList.remove('hidden');
+  $('#cr-fields').innerHTML=`
+    <div><label>Record title</label><input id="cd-title" value="${esc(p.title)}"></div>
+    <div><label>Owner / Officer</label><input id="cd-owner" value="${esc(p.owner)}"></div>
+    <div><label>Date</label><input id="cd-date" type="date" value="${p.date}"></div>
+    <div><label>Vault classification</label><select id="cd-cls">${['Confidential','Internal','Public'].map(c=>`<option>${c}</option>`).join('')}</select></div>
+    <div class="sm:col-span-2"><label>Description (from document)</label><textarea id="cd-desc" rows="3">${esc(txt.slice(0,600))}</textarea></div>`;
+  lucide.createIcons();
+}
+function createFromDoc(kind){
+  if(!requireRole(['Admin','Security Officer']))return;
+  const t=$('#cd-title').value.trim(), owner=$('#cd-owner').value.trim(), date=$('#cd-date').value, desc=$('#cd-desc').value.trim(), cls=$('#cd-cls').value;
+  if(!t||!owner||!date||!desc){ toast('All fields are required.','error'); return; }
+  const p=scanState.parsed||{};
+  if(kind==='risk'){ const l=Math.min(5,Math.max(1,p.l||3)), i=Math.min(5,Math.max(1,p.i||3)); const sc=calcRisk(l,i);
+    DB.risks.unshift({id:uid('RSK'),title:t,desc:desc,cat:p.cat||'Cyber',owner:owner,l:l,i:i,score:sc.score,level:sc.level,plan:'Treatment plan drafted from scanned document — review and update.',status:'Identified',created:date});
+    logAction('Created risk "'+t+'" via document scan');
+    if(sc.level==='Critical')notify('risk','Critical risk alert','"'+t+'" scored '+sc.score+' (Critical).'); }
+  else if(kind==='incident'){ const sev=['Critical','High','Medium','Low'].indexOf(p.sev)>-1?p.sev:'Medium';
+    DB.incidents.unshift({id:uid('INC'),title:t,cls:'Other',sev:sev,desc:desc,date:date,officer:owner,actions:'',notes:desc.slice(0,200),status:'Reported',resolvedDate:null,timeline:[{t:new Date().toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'}),x:'Imported from scanned document by '+me().name}]});
+    logAction('Created incident "'+t+'" via document scan');
+    if(sev==='Critical'||sev==='High')notify('incident','New '+sev+' incident',t+' imported from scanned document.'); }
+  else{ DB.policies.unshift({id:uid('POL'),name:t,desc:desc,owner:owner,status:'Draft',created:date,updated:today()});
+    logAction('Created policy "'+t+'" via document scan'); }
+  DB.documents.unshift({id:uid('DOC'),name:scanState.file?scanState.file.name:'scan-'+Date.now()+'.txt',cls:cls,src:'OCR Scan',date:today(),by:me().name,text:scanState.text});
+  dbSave(); updateIncBadge(); toast('Record created & document saved to vault.'); renderDocs();
+}
+function docForm(){
+  if(!canEdit()){ toast('Viewers cannot upload documents.','error'); return; }
+  openModal('Upload Document',`
+    <div><label>Document name *</label><input id="df-name" placeholder="e.g. Vendor Security Assessment — NovaPay.pdf"></div>
+    <div><label>Classification</label><select id="df-cls">${['Confidential','Internal','Public'].map(c=>`<option>${c}</option>`).join('')}</select></div>
+    <div><label>Notes / summary</label><textarea id="df-notes" rows="3" placeholder="Short description of this document…"></textarea></div>
+    <div class="p-3 rounded-lg text-xs" style="background:var(--card2);border:1px solid var(--border)">Demo vault stores metadata and a short text preview. In production, files would be encrypted at rest with KMS-managed keys and virus-scanned on upload.</div>`,()=>{
+    const n=$('#df-name').value.trim(); if(!n){ toast('Document name is required.','error'); return false; }
+    DB.documents.unshift({id:uid('DOC'),name:n,cls:$('#df-cls').value,src:'Manual upload',date:today(),by:me().name,text:$('#df-notes').value.trim()});
+    logAction('Uploaded document "'+n+'" ('+$('#df-cls').value+')'); dbSave(); renderDocs(); toast('Document added to vault.'); });
+}
+function docView(id){ const d=DB.documents.find(x=>x.id===id); if(!d)return;
+  openModal('Document · '+d.id,`<div class="p-4 rounded-xl border" style="border-color:var(--border);background:var(--card2)">
+    <h4 class="font-extrabold mb-2 break-all">${esc(d.name)}</h4>
+    <div class="grid grid-cols-2 gap-2 text-xs mb-3"><p><span class="muted">Class:</span> <b>${d.cls}</b></p><p><span class="muted">Source:</span> <b>${esc(d.src)}</b></p>
+    <p><span class="muted">Uploaded:</span> <b>${fmtD(d.date)}</b></p><p><span class="muted">By:</span> <b>${esc(d.by)}</b></p></div>
+    <p class="text-xs font-bold uppercase tracking-wide muted mb-1">Content preview</p>
+    <pre class="mono text-[11px] whitespace-pre-wrap p-3 rounded-lg max-h-56 overflow-y-auto" style="background:var(--bg);border:1px solid var(--border)">${esc(d.text||'—')}</pre></div>`,null,'Close'); }
+function docDel(id){ if(!requireRole(['Admin','Security Officer']))return; const d=DB.documents.find(x=>x.id===id);
+  confirmDlg('Delete document "'+d.name+'" from the vault?',()=>{ DB.documents=DB.documents.filter(x=>x.id!==id); dbSave(); logAction('Deleted document '+d.name); toast('Document deleted.','info'); renderDocs(); }); }
+
+/* ═════════ GLOBAL SEARCH ═════════ */
+function globalSearch(q){
+  const drop=$('#search-drop'); q=q.trim().toLowerCase();
+  if(!q){ drop.classList.add('hidden'); return; }
+  const hits=[
+    ...DB.risks.filter(r=>r.title.toLowerCase().includes(q)||r.id.toLowerCase().includes(q)).map(r=>({icon:'alert-triangle',t:r.title,s:r.id+' · '+r.level,v:'risks'})),
+    ...DB.policies.filter(p=>p.name.toLowerCase().includes(q)||p.id.toLowerCase().includes(q)).map(p=>({icon:'scroll-text',t:p.name,s:p.id+' · '+p.status,v:'governance'})),
+    ...DB.incidents.filter(i=>i.title.toLowerCase().includes(q)||i.id.toLowerCase().includes(q)).map(i=>({icon:'siren',t:i.title,s:i.id+' · '+i.status,v:'incidents'})),
+    ...DB.audits.filter(a=>a.title.toLowerCase().includes(q)||a.id.toLowerCase().includes(q)).map(a=>({icon:'clipboard-check',t:a.title,s:a.id+' · '+a.status,v:'audits'})),
+    ...DB.frameworks.filter(f=>f.name.toLowerCase().includes(q)).map(f=>({icon:'check-square',t:f.name,s:compPctOf(f)+'% compliant',v:'compliance'})),
+    ...DB.documents.filter(d=>d.name.toLowerCase().includes(q)).map(d=>({icon:'scan-line',t:d.name,s:d.id+' · '+d.cls,v:'docs'})),
+  ].slice(0,10);
+  const inp=$('#global-search'); const r=inp.getBoundingClientRect();
+  drop.style.top=(r.bottom+6)+'px'; drop.style.left=r.left+'px';
+  drop.innerHTML=hits.length?hits.map((h,i)=>`<div class="px-4 py-2.5 flex items-center gap-3 cursor-pointer hover:bg-cyan-500/10 border-b last:border-0" style="border-color:var(--border)" onclick="go('${h.v}');$('#search-drop').classList.add('hidden');$('#global-search').value=''">
+    <i data-lucide="${h.icon}" class="w-4 h-4 text-cy shrink-0"></i><div class="min-w-0"><b class="text-sm truncate block">${esc(h.t)}</b><span class="text-[11px] muted">${esc(h.s)}</span></div></div>`).join('')
+    :'<p class="p-4 text-sm muted">No results for "'+esc(q)+'".</p>';
+  drop.classList.remove('hidden'); lucide.createIcons();
+}
+document.addEventListener('click',e=>{ if(!e.target.closest('#global-search')&&!e.target.closest('#search-drop')) $('#search-drop').classList.add('hidden'); });
+document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ closeModal(); $('#search-drop').classList.add('hidden'); } if(e.key==='Enter'&&document.activeElement&&['li-email','li-pass'].includes(document.activeElement.id)) doLogin(); });
+
+/* ═════════ BOOT ═════════ */
+function boot(){
+  dbLoad(); loadSession();
+  applyTheme(localStorage.getItem('grcshield_theme')||'dark');
+  const u=me();
+  if(u&&u.active){ renderApp(); go('dashboard'); }
+  else { if(u&&!u.active){ session=null; saveSession(); } renderLogin(); }
+}
+boot();
+</script>
+</body>
+</html>
